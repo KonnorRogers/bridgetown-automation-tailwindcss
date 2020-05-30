@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "bridgetown"
-require File.expand_path("../lib/sample-plugin", __dir__)
+require File.expand_path("../lib/bridgetown-plugin-tailwindcss", __dir__)
 
 Bridgetown.logger.log_level = :error
 

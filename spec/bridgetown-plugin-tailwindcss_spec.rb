@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe(SamplePlugin) do
+describe(TailwindCss) do
   let(:overrides) { {} }
   let(:config) do
     Bridgetown.configuration(Bridgetown::Utils.deep_merge_hashes({

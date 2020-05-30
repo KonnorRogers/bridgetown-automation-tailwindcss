@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module SamplePlugin
+module TailwindCss
   class Builder < Bridgetown::Builder
     def build
       liquid_tag "sample_plugin" do
@@ -10,4 +10,4 @@ module SamplePlugin
   end
 end
 
-SamplePlugin::Builder.register
+TailwindCss::Builder.register

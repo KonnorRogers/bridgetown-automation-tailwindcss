@@ -1,8 +1,8 @@
 /* Use in your app by simply adding to your app's index.js:
 
-import SamplePlugin from "bridgetown-sample-plugin"
+import TailwindCss from "bridgetown-plugin-tailwindcss"
 
-SamplePlugin()
+TailwindCss()
 */
 
 export default function() {

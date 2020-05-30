@@ -1,10 +1,10 @@
 {
-  "name": "bridgetown-sample-plugin",
+  "name": "bridgetown-plugin-tailwindcss",
   "version": "0.1.0",
   "main": "frontend/javascript/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bridgetownrb/bridgetown-sample-plugin.git"
+    "url": "https://github.com/bridgetownrb/bridgetown-plugin-tailwindcss.git"
   },
   "author": "Bridgetown Maintainers <maintainers@bridgetownrb.com>",
   "homepage": "https://www.bridgetownrb.com",
