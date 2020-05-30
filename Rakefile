@@ -58,8 +58,8 @@ namespace :plugin do
       # Check for /bridgetown-sample-plugin/ first, if that doesnt
       # exist, then check for regular /sample-plugin/
       replacement_text = text.gsub(SAMPLE_PLUGIN_MODULE, MODULE_NAME)
-      replacement_text = text.gsub(BRIDGETOWN_SAMPLE_PLUGIN, PLUGIN_NAME)
-      replacement_text = text.gsub(SAMPLE_PLUGIN, PLUGIN_NAME)
+      replacement_text = replacement_text.gsub(BRIDGETOWN_SAMPLE_PLUGIN, PLUGIN_NAME)
+      replacement_text = replacement_text.gsub(SAMPLE_PLUGIN, PLUGIN_NAME)
       File.open(file + ".backup", "w") { |file| file.puts replacement_text }
     end
   end
