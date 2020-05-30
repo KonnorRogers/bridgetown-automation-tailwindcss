@@ -8,11 +8,6 @@ RSpec::Core::RakeTask.new(:spec)
 task :default => :spec
 task :test => :spec
 
-PLUGIN_NAME = "bridgetown-plugin-tailwindcss"
-
-MODULE_NAME = "TailwindCss"
-MODULE_REGEXP = /SamplePlugin/
-
 def filelist(*strings)
   Rake::FileList.new(strings) do |fl|
     fl.exclude(/node_modules/)
@@ -22,6 +17,20 @@ def filelist(*strings)
   end
 end
 
+def file_rename(file, regex, string)
+  return nil unless file =~ regex
+
+  new_file = file.gsub(regex, string)
+  File.rename(file, new_file)
+end
+
+PLUGIN_NAME = "bridgetown-plugin-tailwindcss"
+MODULE_NAME = "TailwindCss"
+
+SAMPLE_PLUGIN = /sample-plugin/
+BRIDGETOWN_SAMPLE_PLUGIN = /bridgetown-sample-plugin/
+SAMPLE_PLUGIN_MODULE = /SamplePlugin/
+
 PLUGIN_FILES = filelist("**/*sample-plugin**")
 ALL_FILES = filelist("**/*")
 
@@ -30,13 +39,11 @@ namespace :plugin do
   desc "Renames the plugin"
   task :rename_files do
     PLUGIN_FILES.each do |file|
-      if file =~ /bridgetown-sample-plugin/
-        new_file = file.gsub(/bridgetown-sample-plugin/, PLUGIN_NAME)
-        File.rename(file, new_file)
-      elsif file =~ /.*sample-plugin.*/
-        new_file = file.gsub(/sample-plugin/, PLUGIN_NAME)
-        File.rename(file, new_file)
-      end
+      # fixes bridgetown_sample_plugin.gemspec
+      next if file_rename(file + ".backup", BRIDGETOWN_SAMPLE_PLUGIN, PLUGIN_NAME)
+
+      # fixes everything else
+      file_rename(file + ".backup", SAMPLE_PLUGIN, PLUGIN_NAME)
     end
   end
 
@@ -47,7 +54,10 @@ namespace :plugin do
 
       text = File.read(file)
       replacement_text = text.gsub(MODULE_REGEXP, MODULE_NAME)
-      File.open(file, "w") { |file| file.puts replacement_text }
+      replacement_text = text.gsub(SAMPLE_PLUGIN, PLUGIN_NAME)
+      File.open(file + ".backup", "w") { |file| file.puts replacement_text }
     end
   end
 end
+
+
