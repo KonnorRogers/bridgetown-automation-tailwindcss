@@ -31,6 +31,7 @@ MODULE_NAME = "TailwindCss"
 SAMPLE_PLUGIN = /sample-plugin/
 BRIDGETOWN_SAMPLE_PLUGIN = /bridgetown-sample-plugin/
 SAMPLE_PLUGIN_MODULE = /SamplePlugin/
+ALL_REGEX_ARY = [SAMPLE_PLUGIN, BRIDGETOWN_SAMPLE_PLUGIN, SAMPLE_PLUGIN_MODULE]
 
 PLUGIN_FILES = filelist("**/*sample-plugin**")
 ALL_FILES = filelist("**/*")
@@ -54,6 +55,9 @@ namespace :plugin do
       next if File.directory?(file)
 
       text = File.read(file).encode("UTF-8", invalid: :replace, replace: "?")
+
+      # Go to next iteration, unless it contains the regex
+      next unless ALL_REGEX_ARY.any? { |regex| text =~ regex }
 
       # Check for /bridgetown-sample-plugin/ first, if that doesnt
       # exist, then check for regular /sample-plugin/
