@@ -14,6 +14,7 @@ def filelist(*strings)
     fl.exclude(/Rakefile/)
     fl.exclude(/\.md/)
     fl.exclude(/\.txt/)
+    fl.exclude(/tags/)
   end
 end
 
