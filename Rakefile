@@ -22,8 +22,14 @@ namespace :plugin do
     PLUGIN_FILES.each do |file|
       ext = file.pathmap("%x")
 
+      if file =~ /bridgetown-sample-plugin/
+        new_file = file.gsub(/bridgetown-sample-plugin/, PLUGIN_NAME)
+        File.rename(file, new_file)
+      end
+
       if file =~ /.*sample-plugin.*/
-        File.rename(file, "#{PLUGIN_NAME}#{ext}")
+        new_file = file.gsub(/sample-plugin/, PLUGIN_NAME)
+        File.rename(file, new_file)
       end
     end
   end
