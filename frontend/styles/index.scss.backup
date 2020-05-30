@@ -1,8 +1,0 @@
-/* Use in your app by simply adding to your app's index.scss:
-
-@import "~bridgetown-bridgetown-plugin-tailwindcss/frontend/styles";
-*/
-
-body {
-  background: #ffc;
-}
