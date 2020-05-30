@@ -12,7 +12,7 @@ MODULE_NAME = "TailwindCss"
 
 # https://avdi.codes/rake-part-2-file-lists/
 namespace :plugin do
-  PLUGIN_FILES = Rake::FileList["**sample-plugin**", "**/*sample-plugin**"] do |fl|
+  PLUGIN_FILES = Rake::FileList["**/*sample-plugin**"] do |fl|
     fl.exclude("node_modules")
     # files = Rake::FileList[regexp]
   end
@@ -22,11 +22,9 @@ namespace :plugin do
     PLUGIN_FILES.each do |file|
       ext = file.pathmap("%x")
 
-      p file
-      # if file =~ /.*sample-plugin.*/
-      #   # File.rename(file, "#{PLUGIN_NAME}#{ext}")
-      #   p file
-      # end
+      if file =~ /.*sample-plugin.*/
+        File.rename(file, "#{PLUGIN_NAME}#{ext}")
+      end
     end
   end
 end
