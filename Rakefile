@@ -9,11 +9,13 @@ task :default => :spec
 
 # https://avdi.codes/rake-part-2-file-lists/
 namespace :plugin do
+  PLUGIN_FILES = Rake::FileList["**/*sample-plugin**", "**sample-plugin**"] do |fl|
+    fl.exclude("node_modules")
+    # files = Rake::FileList[regexp]
+  end
+
   desc "Renames the plugin"
   task :rename do
-
-    files = Rake::FileList["**/*"]
-    files.exclude("node_modules/*")
-    puts files
+    puts PLUGIN_FILES.ext(".rb")
   end
 end
