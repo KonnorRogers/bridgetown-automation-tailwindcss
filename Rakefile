@@ -5,6 +5,7 @@ require "rspec/core/rake_task"
 
 RSpec::Core::RakeTask.new(:spec)
 
+task :test => :spec
 task :default => :spec
 
 PLUGIN_NAME = "bridgetown-plugin-tailwindcss"
@@ -20,14 +21,10 @@ namespace :plugin do
   desc "Renames the plugin"
   task :rename do
     PLUGIN_FILES.each do |file|
-      ext = file.pathmap("%x")
-
       if file =~ /bridgetown-sample-plugin/
         new_file = file.gsub(/bridgetown-sample-plugin/, PLUGIN_NAME)
         File.rename(file, new_file)
-      end
-
-      if file =~ /.*sample-plugin.*/
+      elsif file =~ /.*sample-plugin.*/
         new_file = file.gsub(/sample-plugin/, PLUGIN_NAME)
         File.rename(file, new_file)
       end
