@@ -45,10 +45,10 @@ namespace :plugin do
   task :rename_files do
     PLUGIN_FILES.each do |file|
       # fixes bridgetown_sample_plugin.gemspec
-      next if file_rename(file + ".backup", BRIDGETOWN_SAMPLE_PLUGIN, PLUGIN_NAME)
+      next if file_rename(file, BRIDGETOWN_SAMPLE_PLUGIN, PLUGIN_NAME)
 
       # fixes everything else
-      file_rename(file + ".backup", SAMPLE_PLUGIN, PLUGIN_NAME)
+      file_rename(file, SAMPLE_PLUGIN, PLUGIN_NAME)
     end
   end
 
@@ -68,7 +68,7 @@ namespace :plugin do
       replacement_text = text.gsub(SAMPLE_PLUGIN_MODULE, MODULE_NAME)
       replacement_text = replacement_text.gsub(BRIDGETOWN_SAMPLE_PLUGIN, PLUGIN_NAME)
       replacement_text = replacement_text.gsub(SAMPLE_PLUGIN, PLUGIN_NAME)
-      File.open(file + ".backup", "w") { |file| file.puts replacement_text }
+      File.open(file, "w") { |file| file.puts replacement_text }
     end
   end
 end
