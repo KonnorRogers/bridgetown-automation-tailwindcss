@@ -38,6 +38,9 @@ ALL_FILES = filelist("**/*")
 
 # https://avdi.codes/rake-part-2-file-lists/
 namespace :plugin do
+  desc "Renames and rewrites files"
+  task rename: [:rename_files, :rewrite_files]
+
   desc "Renames the plugin"
   task :rename_files do
     PLUGIN_FILES.each do |file|
@@ -54,6 +57,7 @@ namespace :plugin do
     ALL_FILES.each do |file|
       next if File.directory?(file)
 
+      # Fixes an issue with non-unicode characters
       text = File.read(file).encode("UTF-8", invalid: :replace, replace: "?")
 
       # Go to next iteration, unless it contains the regex
