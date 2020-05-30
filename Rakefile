@@ -7,11 +7,12 @@ RSpec::Core::RakeTask.new(:spec)
 
 task :default => :spec
 
-plugin_name = "bridgetown-plugin-tailwindcss"
+PLUGIN_NAME = "bridgetown-plugin-tailwindcss"
+MODULE_NAME = "TailwindCss"
 
 # https://avdi.codes/rake-part-2-file-lists/
 namespace :plugin do
-  PLUGIN_FILES = Rake::FileList["**/*sample-plugin**"] do |fl|
+  PLUGIN_FILES = Rake::FileList["**sample-plugin**", "**/*sample-plugin**"] do |fl|
     fl.exclude("node_modules")
     # files = Rake::FileList[regexp]
   end
@@ -19,10 +20,13 @@ namespace :plugin do
   desc "Renames the plugin"
   task :rename do
     PLUGIN_FILES.each do |file|
-      next unless file =~ /bridgetown-sample-plugin.gemspec/
-
       ext = file.pathmap("%x")
-      File.rename(file, "#{plugin_name}#{ext}")
+
+      p file
+      # if file =~ /.*sample-plugin.*/
+      #   # File.rename(file, "#{PLUGIN_NAME}#{ext}")
+      #   p file
+      # end
     end
   end
 end
