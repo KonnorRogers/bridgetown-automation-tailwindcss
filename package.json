@@ -4,9 +4,9 @@
   "main": "frontend/javascript/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bridgetownrb/bridgetown-plugin-tailwindcss.git"
+    "url": "https://github.com/paramagicdev/bridgetown-plugin-tailwindcss.git"
   },
-  "author": "Bridgetown Maintainers <maintainers@bridgetownrb.com>",
+  "author": "Konnor Rogers <konnor7414@gmail.com>",
   "homepage": "https://www.bridgetownrb.com",
   "license": "MIT",
   "private": false,
