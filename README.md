@@ -54,3 +54,11 @@ plugin's GitHub repo so the plugin or theme will show up on [Bridgetown's offici
 
 
 
+```javascript
+// frontend/styles/index.js
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+// ...
+```
