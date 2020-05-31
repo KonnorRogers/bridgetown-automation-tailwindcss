@@ -1,82 +1,83 @@
 require 'thor'
 
-module Utils
-  class Actions < Thor
-    include Thor::Actions
-  end
-  # @see https://ruby-doc.org/core-2.7.1/Regexp.html#class-Regexp-label-Capturing
-  # capture groups
-  class Bump < Thor
-    include Thor::Actions
+module TailwindCss
+  module Utils
+    class Actions < Thor
+      include Thor::Actions
+    end
+    # @see https://ruby-doc.org/core-2.7.1/Regexp.html#class-Regexp-label-Capturing
+    # capture groups
+    class Bump < Thor
+      include Thor::Actions
 
-    VERSION_REGEX = /(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)/
-    VERSION = TailwindCss::VERSION
+      VERSION_REGEX = /(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)/
 
-    no_commands {
-      def current_version
-        VERSION
-      end
-
-      def bump_version_to_string(string)
-        say("Bumping from #{VERSION} to #{string}", :red)
-
-        version_files.each do |file|
-          gsub_file(file, VERSION_REGEX, string)
+      no_commands {
+        def current_version
+          VERSION
         end
-      end
 
-      def bump_version(type, version: VERSION, value: nil)
-        say(version_change(type, version: version, value: value), :red)
+        def bump_version_to_string(string)
+          say("Bumping from #{VERSION} to #{string}", :red)
 
-
-        version_files.each do |file|
-          gsub_file(file, VERSION_REGEX,
-                    to_version(type, version: version, value: value))
+          version_files.each do |file|
+            gsub_file(file, VERSION_REGEX, string)
+          end
         end
-      end
 
-      private
+        def bump_version(type, version: VERSION, value: nil)
+          say(version_change(type, version: version, value: value), :red)
 
-      def version_files
-        @package_json = File.expand_path("package.json")
-        @version_file = File.expand_path(File.join(__dir__, "version.rb"))
 
-        [ @package_json, @version_file ]
-      end
+          version_files.each do |file|
+            gsub_file(file, VERSION_REGEX,
+                      to_version(type, version: version, value: value))
+          end
+        end
 
-      def to_version(type, version: nil, value: nil)
-        from = version
-        match = VERSION_REGEX.match(from)
+        private
 
-        groups = {
-          major: match[:major],
-          minor: match[:minor],
-          patch: match[:patch]
-        }
+        def version_files
+          @package_json = File.expand_path("package.json")
+          @version_file = File.expand_path(File.join(__dir__, "version.rb"))
 
-        raise "\nYou gave #{type} but the only accepted types are
-              #{groups.keys}" unless groups.keys.include?(type)
+          [ @package_json, @version_file ]
+        end
 
-        groups[type] = value || (groups[type].to_i + 1).to_s
+        def to_version(type, version: nil, value: nil)
+          from = version
+          match = VERSION_REGEX.match(from)
 
-        bump_to_zero(type, groups)
+          groups = {
+            major: match[:major],
+            minor: match[:minor],
+            patch: match[:patch]
+          }
 
-        "#{groups[:major]}.#{groups[:minor]}.#{groups[:patch]}"
-      end
+          raise "\nYou gave #{type} but the only accepted types are
+                #{groups.keys}" unless groups.keys.include?(type)
 
-      def bump_to_zero(type, groups)
-        return if type == :patch
+          groups[type] = value || (groups[type].to_i + 1).to_s
 
-        groups[:patch] = "0"
+          bump_to_zero(type, groups)
 
-        return if type == :minor
+          "#{groups[:major]}.#{groups[:minor]}.#{groups[:patch]}"
+        end
 
-        groups[:minor] = "0"
-      end
+        def bump_to_zero(type, groups)
+          return if type == :patch
 
-      def version_change(type, version: nil, value: nil)
-        "Bumping from #{version} to #{to_version(type, version: version, value: value)}"
-      end
-    }
+          groups[:patch] = "0"
+
+          return if type == :minor
+
+          groups[:minor] = "0"
+        end
+
+        def version_change(type, version: nil, value: nil)
+          "Bumping from #{version} to #{to_version(type, version: version, value: value)}"
+        end
+      }
+    end
   end
 end
