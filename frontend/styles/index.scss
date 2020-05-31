@@ -3,6 +3,6 @@
 @import "~bridgetown-plugin-tailwindcss/frontend/styles";
 */
 
-body {
-  background: #ffc;
-}
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
