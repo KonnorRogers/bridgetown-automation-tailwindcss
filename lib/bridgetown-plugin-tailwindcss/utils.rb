@@ -10,9 +10,14 @@ module Utils
     include Thor::Actions
 
     VERSION_REGEX = /(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)/
+    VERSION = TailwindCss::VERSION
 
     no_commands {
-      def bump_version(type, version: TailwindCss::VERSION, value: nil)
+      def current_version
+        VERSION
+      end
+
+      def bump_version(type, version: VERSION, value: nil)
         say(version_change(type, version: version, value: value), :red)
 
         @package_json = File.expand_path("package.json")
@@ -26,7 +31,7 @@ module Utils
 
       private
 
-      def to_version(type, version:, value:)
+      def to_version(type, version: nil, value: nil)
         from = version
         match = VERSION_REGEX.match(from)
 
@@ -56,8 +61,8 @@ module Utils
         groups[:minor] = "0"
       end
 
-      def version_change(type, version:, value:)
-        "Bumping from #{version} to #{to_version(type, version: version)}"
+      def version_change(type, version: nil, value: nil)
+        "Bumping from #{version} to #{to_version(type, version: version, value: value)}"
       end
     }
   end

@@ -15,6 +15,10 @@ end
 
 
 namespace :bump do
+  task :current do
+    puts Utils::Bump.new.current_version
+  end
+
   task :major do
     Utils::Bump.new.bump_version(:major)
   end
