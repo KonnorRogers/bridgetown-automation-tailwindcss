@@ -9,7 +9,7 @@ RSpec::Core::RakeTask.new(:spec)
 task :default => :spec
 task :test => :spec
 
-task :release do
+task :deploy do
   Rake.sh "./script/release"
 end
 
