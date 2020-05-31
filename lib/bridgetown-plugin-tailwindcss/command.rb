@@ -2,7 +2,7 @@ require 'bridgetown'
 require 'utils'
 
 class Command < Bridgetown::Command
-  UTILS = Utils.new
+  ACTIONS = Utils::Actions.new
 
   class << self
     def init_with_program(prog)
@@ -28,8 +28,8 @@ class Command < Bridgetown::Command
       webpack_config = File.expand_path("webpack.config.js")
       tailwind_config = File.expand_path("tailwind.config.js")
 
-      UTILS.create_file(webpack_config, webpack_file_contents)
-      UTILS.create_file(tailwind_config, tailwind_config_contents)
+      ACTIONS.create_file(webpack_config, webpack_file_contents)
+      ACTIONS.create_file(tailwind_config, tailwind_config_contents)
       prepend_to_stylesheet
     end
 
@@ -39,7 +39,7 @@ class Command < Bridgetown::Command
 
       return unless File.exist?(frontend_stylesheet)
 
-      UTILS.prepend_to_file(frontend_stylesheet, import_tailwind_contents)
+      ACTIONS.prepend_to_file(frontend_stylesheet, import_tailwind_contents)
     end
 
     def import_tailwind_contents
