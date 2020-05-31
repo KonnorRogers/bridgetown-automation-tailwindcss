@@ -48,7 +48,7 @@ ALL_FILES = filelist("**/*").reverse
 # https://avdi.codes/rake-part-2-file-lists/
 namespace :plugin do
   desc "Renames and rewrites files"
-  task rename: [:rename_files, :rewrite_files] do
+  task rename: [:rewrite_files, :rename_files] do
   end
 
   desc "Renames the plugin"
