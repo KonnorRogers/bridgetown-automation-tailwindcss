@@ -22,7 +22,7 @@ def file_rename(file, regex, string)
   return nil unless file =~ regex
 
   new_file = file.gsub(regex, string)
-  File.rename(file, new_file)
+  Rake.mv(file, new_file)
 end
 
 PLUGIN_NAME = "bridgetown-plugin-tailwindcss"
@@ -51,14 +51,9 @@ namespace :plugin do
 
   desc "Renames the plugin"
   task :rename_files do
-    ALL_FILES.sort_by(&:size).each do |file|
-      p file
-      # fixes bridgetown_sample_plugin.gemspec
+    ALL_FILES.map do |file|
       file_rename(file, BRIDGETOWN_SAMPLE_PLUGIN, PLUGIN_NAME)
-
-      # fixes everything else
       file_rename(file, SAMPLE_PLUGIN, PLUGIN_NAME)
-
       file_rename(file, UNDERSCORE_SAMPLE_PLUGIN, UNDERSCORE_PLUGIN_NAME)
     end
   end
