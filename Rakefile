@@ -33,7 +33,7 @@ BRIDGETOWN_SAMPLE_PLUGIN = /bridgetown-sample-plugin/
 SAMPLE_PLUGIN_MODULE = /SamplePlugin/
 ALL_REGEX_ARY = [SAMPLE_PLUGIN, BRIDGETOWN_SAMPLE_PLUGIN, SAMPLE_PLUGIN_MODULE]
 
-PLUGIN_FILES = filelist("**/*sample-plugin**")
+PLUGIN_FILES = filelist("**/*sample-plugin**", "**/*sample-plugin**/*")
 ALL_FILES = filelist("**/*")
 
 # https://avdi.codes/rake-part-2-file-lists/
