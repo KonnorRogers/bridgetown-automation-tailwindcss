@@ -1,6 +1,7 @@
 require 'thor'
 
-class Utils < Thor
+module Utils
+  THOR = Thor.new
 
   # @see https://ruby-doc.org/core-2.7.1/Regexp.html#class-Regexp-label-Capturing
   # capture groups
@@ -8,7 +9,9 @@ class Utils < Thor
     VERSION_REGEX = /(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)/
 
     def bump_version(type, version = TailwindCss::VERSION)
-      say(version_change(type, version), :red)
+      p type
+      p version
+      THOR.say(version_change(type, version), :red)
 
       @package_json = File.expand_path("package.json")
       @version_file = File.expand_path(File.join(__dir__, "version.rb"))
@@ -50,7 +53,7 @@ class Utils < Thor
     end
 
     def version_change(type, version)
-      "Bumping from #{version} to #{to_version(version, type)}"
+      "Bumping from #{version} to #{to_version(type, version)}"
     end
   end
 end
