@@ -19,6 +19,13 @@ namespace :bump do
     puts Utils::Bump.new.current_version
   end
 
+  task :set do
+    question = "What would you like to set your version to? [2.1.0]"
+    value = Utils::Actions.new.ask(question)
+
+    Utils::Bump.new.bump_version_to_string(value)
+  end
+
   task :major do
     Utils::Bump.new.bump_version(:major)
   end

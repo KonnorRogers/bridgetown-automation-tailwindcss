@@ -17,19 +17,32 @@ module Utils
         VERSION
       end
 
+      def bump_version_to_string(string)
+        say("Bumping from #{VERSION} to #{string}", :red)
+
+        version_files.each do |file|
+          gsub_file(file, VERSION_REGEX, string)
+        end
+      end
+
       def bump_version(type, version: VERSION, value: nil)
         say(version_change(type, version: version, value: value), :red)
 
-        @package_json = File.expand_path("package.json")
-        @version_file = File.expand_path(File.join(__dir__, "version.rb"))
 
-        [@package_json, @version_file].each do |file|
+        version_files.each do |file|
           gsub_file(file, VERSION_REGEX,
                     to_version(type, version: version, value: value))
         end
       end
 
       private
+
+      def version_files
+        @package_json = File.expand_path("package.json")
+        @version_file = File.expand_path(File.join(__dir__, "version.rb"))
+
+        [ @package_json, @version_file ]
+      end
 
       def to_version(type, version: nil, value: nil)
         from = version
