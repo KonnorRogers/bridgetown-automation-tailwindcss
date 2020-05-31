@@ -8,6 +8,10 @@ RSpec::Core::RakeTask.new(:spec)
 task :default => :spec
 task :test => :spec
 
+task :release do
+  Rake.sh "./script/release"
+end
+
 def filelist(*strings)
   Rake::FileList.new(strings) do |fl|
     fl.exclude(/node_modules/)
