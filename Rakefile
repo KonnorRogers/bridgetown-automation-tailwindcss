@@ -26,33 +26,39 @@ def file_rename(file, regex, string)
 end
 
 PLUGIN_NAME = "bridgetown-plugin-tailwindcss"
+UNDERSCORE_PLUGIN_NAME = PLUGIN_NAME.gsub(/-/, "_")
 MODULE_NAME = "TailwindCss"
 
 SAMPLE_PLUGIN = /sample-plugin/
+UNDERSCORE_SAMPLE_PLUGIN = /sample_plugin/
 BRIDGETOWN_SAMPLE_PLUGIN = /bridgetown-sample-plugin/
 SAMPLE_PLUGIN_MODULE = /SamplePlugin/
-ALL_REGEX_ARY = [SAMPLE_PLUGIN, BRIDGETOWN_SAMPLE_PLUGIN, SAMPLE_PLUGIN_MODULE]
+
+ALL_REGEX_ARY = [
+  SAMPLE_PLUGIN,
+  UNDERSCORE_SAMPLE_PLUGIN,
+  BRIDGETOWN_SAMPLE_PLUGIN,
+  SAMPLE_PLUGIN_MODULE
+]
 
 ALL_FILES = filelist("**/*")
-
-PLUGIN_FILES = filelist("**/*")
-
 
 # https://avdi.codes/rake-part-2-file-lists/
 namespace :plugin do
   desc "Renames and rewrites files"
   task rename: [:rename_files, :rewrite_files] do
-    p PLUGIN_FILES.select { |file| file =~ SAMPLE_PLUGIN }
   end
 
   desc "Renames the plugin"
   task :rename_files do
-    PLUGIN_FILES.each do |file|
+    ALL_FILES.each do |file|
       # fixes bridgetown_sample_plugin.gemspec
       next if file_rename(file, BRIDGETOWN_SAMPLE_PLUGIN, PLUGIN_NAME)
 
       # fixes everything else
-      file_rename(file, SAMPLE_PLUGIN, PLUGIN_NAME)
+      next if file_rename(file, SAMPLE_PLUGIN, PLUGIN_NAME)
+
+      file_rename(file, UNDERSCORE_SAMPLE_PLUGIN, UNDERSCORE_PLUGIN_NAME)
     end
   end
 
@@ -72,6 +78,8 @@ namespace :plugin do
       replacement_text = text.gsub(SAMPLE_PLUGIN_MODULE, MODULE_NAME)
       replacement_text = replacement_text.gsub(BRIDGETOWN_SAMPLE_PLUGIN, PLUGIN_NAME)
       replacement_text = replacement_text.gsub(SAMPLE_PLUGIN, PLUGIN_NAME)
+      replacement_text = replacement_text.gsub(UNDERSCORE_SAMPLE_PLUGIN,
+                                               UNDERSCORE_PLUGIN_NAME)
       File.open(file, "w") { |file| file.puts replacement_text }
     end
   end
