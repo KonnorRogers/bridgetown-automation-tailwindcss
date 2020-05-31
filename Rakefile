@@ -42,7 +42,8 @@ ALL_REGEX_ARY = [
   SAMPLE_PLUGIN_MODULE
 ]
 
-ALL_FILES = filelist("**/*")
+# Reverse it so files come first, then directories
+ALL_FILES = filelist("**/*").reverse
 
 # https://avdi.codes/rake-part-2-file-lists/
 namespace :plugin do
