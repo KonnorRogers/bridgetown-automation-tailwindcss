@@ -1,6 +1,9 @@
 require 'bridgetown'
+require 'utils'
 
 class Command < Bridgetown::Command
+  include Utils
+
   class << self
     def init_with_program(prog)
       prog.command(:init) do |c|
@@ -17,8 +20,8 @@ class Command < Bridgetown::Command
     private
 
     def generate_tailwind
-      write_files
       install_tailwind
+      write_files
     end
 
     def install_tailwind
@@ -28,12 +31,38 @@ class Command < Bridgetown::Command
     end
 
     def write_files
-      File.open(File.expand_path("webpack.config.js"), "w") do |f|
+      webpack_config = File.expand_path("webpack.config.js")
+      tailwind_config = File.expand_path("tailwind.config.js")
+
+      File.open(webpack_config) do |f|
         f.write(webpack_file_contents)
       end
+
+      File.open(tailwind_config) do |f|
+        f.write(tailwind_config_contents)
+      end
+
+      prepend_to_stylesheet
     end
 
-    def tailwind_file_contents
+    def prepend_to_stylesheet
+      frontend_stylesheet = File.join("frontend", "styles", "index.scss")
+      frontend_stylesheet = File.expand_path(frontend_stylesheet)
+
+      return unless File.exist?(frontend_stylesheet)
+
+      prepend_to_file(frontend_stylesheet, import_tailwind_contents)
+    end
+
+    def import_tailwind_contents
+      <<~IMPORT
+        @import 'tailwindcss/base';
+        @import 'tailwindcss/components';
+        @import 'tailwindcss/utilities';
+      IMPORT
+    end
+
+    def tailwind_config_contents
       <<~TAILWIND
         module.exports = {
           purge: {
