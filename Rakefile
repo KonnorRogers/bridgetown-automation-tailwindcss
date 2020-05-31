@@ -54,10 +54,10 @@ namespace :plugin do
     ALL_FILES.each do |file|
       p file
       # fixes bridgetown_sample_plugin.gemspec
-      next if file_rename(file, BRIDGETOWN_SAMPLE_PLUGIN, PLUGIN_NAME)
+      file_rename(file, BRIDGETOWN_SAMPLE_PLUGIN, PLUGIN_NAME)
 
       # fixes everything else
-      next if file_rename(file, SAMPLE_PLUGIN, PLUGIN_NAME)
+      file_rename(file, SAMPLE_PLUGIN, PLUGIN_NAME)
 
       file_rename(file, UNDERSCORE_SAMPLE_PLUGIN, UNDERSCORE_PLUGIN_NAME)
     end
