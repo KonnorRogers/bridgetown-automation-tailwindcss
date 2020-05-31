@@ -2,9 +2,7 @@
 
 require "bundler/gem_tasks"
 require "rspec/core/rake_task"
-require 'thor'
-
-UTILS = Thor.new
+require "utils"
 
 RSpec::Core::RakeTask.new(:spec)
 
@@ -15,55 +13,18 @@ task :release do
   Rake.sh "./script/release"
 end
 
-# @see https://ruby-doc.org/core-2.7.1/Regexp.html#class-Regexp-label-Capturing
-# capture groups
-VERSION_REGEX = /(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)/
-
-def to_version(type, version)
-  from = version
-  match = regex.match(from)
-
-  groups = {
-    major: match[:major],
-    minor: match[:minor],
-    patch: match[:patch]
-  }
-
-  type = type.to_sym
-
-  return "Improper type given" if groups.keys.include?(type)
-
-  groups[type] = (groups[type].to_i + 1).to_s
-
-  "#{groups[:major]}.#{groups[:minor]}.#{groups[:patch]}"
-end
-
-def version_change(type, version)
-  "Bumping from #{version} to #{to_version(version, type)}"
-end
-
-def bump_version(type, version = TailwindCss::VERSION)
-  UTILS.say(version_change(type, version), :red)
-
-  @package_json = File.expand_path("package.json")
-  @version_file = File.expand_path(File.join("lib", "bridgetown-plugin-tailwindcss"))
-
-  [@package_json, @version_file].each do |file|
-    UTILS.gsub_file(file, VERSION_REGEX, to_version(type, version))
-  end
-end
 
 namespace :bump do
   task :major do
-    bump_version(:major)
+    Utils::Bump.new.bump_version(:major)
   end
 
   task :minor do
-    bump_version(:minor)
+    Utils::Bump.new.bump_version(:minor)
   end
 
   task :patch do
-    bump_version(:patch)
+    Utils::Bump.new.bump_version(:patch)
   end
 end
 
