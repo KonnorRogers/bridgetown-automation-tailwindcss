@@ -35,16 +35,14 @@ ALL_REGEX_ARY = [SAMPLE_PLUGIN, BRIDGETOWN_SAMPLE_PLUGIN, SAMPLE_PLUGIN_MODULE]
 
 ALL_FILES = filelist("**/*")
 
-PLUGIN_FILES = Rake::FileList.new do |fl|
-  fl.include(SAMPLE_PLUGIN)
-end
+PLUGIN_FILES = filelist("**/*")
 
 
 # https://avdi.codes/rake-part-2-file-lists/
 namespace :plugin do
   desc "Renames and rewrites files"
   task rename: [:rename_files, :rewrite_files] do
-    p PLUGIN_FILES
+    p PLUGIN_FILES.select { |file| file =~ SAMPLE_PLUGIN }
   end
 
   desc "Renames the plugin"
