@@ -52,6 +52,7 @@ namespace :plugin do
   desc "Renames the plugin"
   task :rename_files do
     ALL_FILES.each do |file|
+      p file
       # fixes bridgetown_sample_plugin.gemspec
       next if file_rename(file, BRIDGETOWN_SAMPLE_PLUGIN, PLUGIN_NAME)
 
