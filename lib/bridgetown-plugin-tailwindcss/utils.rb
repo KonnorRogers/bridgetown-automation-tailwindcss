@@ -1,4 +1,6 @@
-require 'thor'
+# frozen_string_literal: true
+
+require "thor"
 
 module TailwindCss
   module Utils
@@ -10,9 +12,10 @@ module TailwindCss
     class Bump < Thor
       include Thor::Actions
 
-      VERSION_REGEX = /(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)/
+      VERSION_REGEX = %r!(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)!.freeze
 
-      no_commands {
+      # rubocop:disable Metrics/BlockLength
+      no_commands do
         def current_version
           VERSION
         end
@@ -28,7 +31,6 @@ module TailwindCss
         def bump_version(type, version: VERSION, value: nil)
           say(version_change(type, version: version, value: value), :red)
 
-
           version_files.each do |file|
             gsub_file(file, VERSION_REGEX,
                       to_version(type, version: version, value: value))
@@ -41,7 +43,7 @@ module TailwindCss
           @package_json = File.expand_path("package.json")
           @version_file = File.expand_path(File.join(__dir__, "version.rb"))
 
-          [ @package_json, @version_file ]
+          [@package_json, @version_file]
         end
 
         def to_version(type, version: nil, value: nil)
@@ -51,11 +53,13 @@ module TailwindCss
           groups = {
             major: match[:major],
             minor: match[:minor],
-            patch: match[:patch]
+            patch: match[:patch],
           }
 
-          raise "\nYou gave #{type} but the only accepted types are
-                #{groups.keys}" unless groups.keys.include?(type)
+          unless groups.key?(type)
+            raise "\nYou gave #{type} but the only accepted types are
+                  #{groups.keys}"
+          end
 
           groups[type] = value || (groups[type].to_i + 1).to_s
 
@@ -77,7 +81,8 @@ module TailwindCss
         def version_change(type, version: nil, value: nil)
           "Bumping from #{version} to #{to_version(type, version: version, value: value)}"
         end
-      }
+      end
+      # rubocop:enable Metrics/BlockLength
     end
   end
 end

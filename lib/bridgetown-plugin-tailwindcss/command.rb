@@ -1,5 +1,7 @@
-require 'bridgetown'
-require_relative 'utils'
+# frozen_string_literal: true
+
+require "bridgetown"
+require_relative "utils"
 
 class TailwindInit < Bridgetown::Command
   ACTIONS = TailwindCss::Utils::Actions.new
@@ -8,10 +10,10 @@ class TailwindInit < Bridgetown::Command
     def init_with_program(prog)
       prog.command(:tailwind_init) do |c|
         c.syntax "tailwind_init"
-        c.description 'Initialize config for Tailwind'
+        c.description "Initialize config for Tailwind"
         # c.option 'path', '--path', 'Choose the path to install tailwind'
 
-        c.action do |args, options|
+        c.action do |_args, _options|
           Bridgetown::Commands::TailwindInit.new.run
         end
       end
@@ -22,7 +24,6 @@ class TailwindInit < Bridgetown::Command
     def run
       write_files
     end
-
 
     def write_files
       webpack_config = File.expand_path("webpack.config.js")
@@ -101,4 +102,3 @@ class TailwindInit < Bridgetown::Command
     end
   end
 end
-

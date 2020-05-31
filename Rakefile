@@ -13,6 +13,10 @@ task :release do
   Rake.sh "./script/release"
 end
 
+task :format do
+  Rake.sh "./script/fmt -a"
+end
+
 
 namespace :bump do
   task :current do
