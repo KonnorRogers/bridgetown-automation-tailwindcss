@@ -5,10 +5,10 @@ require_relative "lib/bridgetown-plugin-tailwindcss/version"
 Gem::Specification.new do |spec|
   spec.name          = "bridgetown-plugin-tailwindcss"
   spec.version       = TailwindCss::VERSION
-  spec.author        = "Bridgetown Team"
-  spec.email         = "maintainers@bridgetownrb.com"
-  spec.summary       = "Sample code for creating new Bridgetown plugins"
-  spec.homepage      = "https://github.com/bridgetownrb/bridgetown-plugin-tailwindcss"
+  spec.author        = "Konnor Rogers"
+  spec.email         = "konnor7414@gmail.com"
+  spec.summary       = "A plugin to add tailwindcss to a site"
+  spec.homepage      = "https://github.com/paramagicdev/bridgetown-plugin-tailwindcss"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r!^(test|script|spec|features|frontend)/!) }
