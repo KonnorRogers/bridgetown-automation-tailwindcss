@@ -2,7 +2,7 @@ require 'bridgetown'
 require 'utils'
 
 class Command < Bridgetown::Command
-  include Utils
+  UTILS = Utils.new
 
   class << self
     def init_with_program(prog)
@@ -20,28 +20,16 @@ class Command < Bridgetown::Command
     private
 
     def generate_tailwind
-      install_tailwind
       write_files
     end
 
-    def install_tailwind
-      yarn_add = "yarn add -D"
-      packages = "tailwindcss postcss-import postcss-loader"
-      Bridgetown::Utils::Exec.run(yarn_add, packages)
-    end
 
     def write_files
       webpack_config = File.expand_path("webpack.config.js")
       tailwind_config = File.expand_path("tailwind.config.js")
 
-      File.open(webpack_config) do |f|
-        f.write(webpack_file_contents)
-      end
-
-      File.open(tailwind_config) do |f|
-        f.write(tailwind_config_contents)
-      end
-
+      UTILS.create_file(webpack_config, webpack_file_contents)
+      UTILS.create_file(tailwind_config, tailwind_config_contents)
       prepend_to_stylesheet
     end
 
@@ -51,7 +39,7 @@ class Command < Bridgetown::Command
 
       return unless File.exist?(frontend_stylesheet)
 
-      prepend_to_file(frontend_stylesheet, import_tailwind_contents)
+      UTILS.prepend_to_file(frontend_stylesheet, import_tailwind_contents)
     end
 
     def import_tailwind_contents
