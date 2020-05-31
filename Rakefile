@@ -33,15 +33,14 @@ BRIDGETOWN_SAMPLE_PLUGIN = /bridgetown-sample-plugin/
 SAMPLE_PLUGIN_MODULE = /SamplePlugin/
 ALL_REGEX_ARY = [SAMPLE_PLUGIN, BRIDGETOWN_SAMPLE_PLUGIN, SAMPLE_PLUGIN_MODULE]
 
-PLUGIN_FILES = filelist("**/*sample-plugin**")
-ALL_FILES = filelist("**/*")
+PLUGIN_FILES = filelist("*/**sample-plugin**")
+ALL_FILES = filelist("*/**")
 
 
 # https://avdi.codes/rake-part-2-file-lists/
 namespace :plugin do
   desc "Renames and rewrites files"
   task rename: [:rename_files, :rewrite_files] do
-    puts PLUGIN_FILES
   end
 
   desc "Renames the plugin"
