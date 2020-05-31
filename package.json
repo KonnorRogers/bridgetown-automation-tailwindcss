@@ -12,5 +12,10 @@
   "private": false,
   "files": [
     "frontend"
-  ]
+  ],
+  "devDependencies": {
+    "postcss-import": "^12.0.1",
+    "postcss-loader": "^3.0.0",
+    "tailwindcss": "^1.4.6"
+  }
 }
