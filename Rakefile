@@ -42,7 +42,7 @@ def version_change(type, version)
   "Bumping from #{version} to #{to_version(version, type)}"
 end
 
-def convert_version(type, version = TailwindCss::VERSION)
+def bump_version(type, version = TailwindCss::VERSION)
   UTILS.say(version_change(type, version), :red)
 
   @package_json = File.expand_path("package.json")
@@ -55,15 +55,15 @@ end
 
 namespace :bump do
   task :major do
-    from_version(
+    bump_version(:major)
   end
 
   task :minor do
-
+    bump_version(:minor)
   end
 
   task :patch do
-
+    bump_version(:patch)
   end
 end
 
