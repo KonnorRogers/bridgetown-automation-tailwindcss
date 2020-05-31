@@ -20,7 +20,7 @@ namespace :bump do
   end
 
   task :set do
-    question = "What would you like to set your version to? [2.1.0]"
+    question = "What would you like to set your version to? IE: [2.1.0] :"
     value = Utils::Actions.new.ask(question)
 
     Utils::Bump.new.bump_version_to_string(value)
