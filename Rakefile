@@ -22,6 +22,7 @@ def file_rename(file, regex, string)
   return nil unless file =~ regex
 
   new_file = file.gsub(regex, string)
+  Rake.mkdir_p(new_file)
   Rake.mv(file, new_file)
 end
 
