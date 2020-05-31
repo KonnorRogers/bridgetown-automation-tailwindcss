@@ -9,15 +9,13 @@ module Utils
     VERSION_REGEX = /(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)/
 
     def bump_version(type, version = TailwindCss::VERSION)
-      p type
-      p version
       THOR.say(version_change(type, version), :red)
 
       @package_json = File.expand_path("package.json")
       @version_file = File.expand_path(File.join(__dir__, "version.rb"))
 
       [@package_json, @version_file].each do |file|
-        gsub_file(file, VERSION_REGEX, to_version(type, version))
+        THOR.gsub_file(file, VERSION_REGEX, to_version(type, version))
       end
     end
 
