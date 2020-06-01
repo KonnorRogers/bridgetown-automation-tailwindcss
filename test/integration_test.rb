@@ -1,10 +1,11 @@
-require 'rake'
+require "test_helper"
+require "fileutils"
 
-class IntegrationTest < Minitest::Test
-  def setup
-    Rake.sh("$CWD")
-  end
 
-  def teardown
+module TailwindCss
+  class IntegrationTest < Minitest::Test
+    def test_it_works
+      assert true
+    end
   end
 end
