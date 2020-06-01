@@ -4,8 +4,11 @@ require "minitest"
 require "rake"
 require "minitest/autorun"
 require "bridgetown"
+require "thor"
 
 Bridgetown.logger.log_level = :error
+
+THOR = TailwindCss::Utils::Action.new
 
 PLUGIN_NAME = "bridgetown-plugin-tailwindcss"
 
@@ -36,7 +39,15 @@ def create_bridgetown_app
   Rake.sh("bundle init --gemspec #{GEMSPEC_FILE}")
   Rake.sh("bundle install")
   Rake.sh("bundle exec bridgetown new . --force")
-  Rake.sh("bundle add bridgetown-plugin-tailwindcss -g bridgetown_plugins")
+
+  THOR.append_to_file(TEST_APP) do
+    <<~GEMFILE
+      group :bridgetown_plugins do
+        'bridgetown-plugin-tailwindcss', '#{TailwindCss::VERSION}'
+      end
+    GEMFILE
+  end
+
   Rake.sh("yarn add #{NPM_TARBALL}")
   Rake.sh("bundle install")
   Rake.sh("bridgetown tailwind_init")

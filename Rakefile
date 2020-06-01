@@ -29,7 +29,7 @@ namespace :bump do
 
   task :set do
     question = "What would you like to set your version to? IE: [2.1.0] :"
-    value = TailwindCss::Utils::Actions.new.ask(question)
+    value = TailwindCss::Utils::Action.new.ask(question)
 
     TailwindCss::Utils::Bump.new.bump_version_to_string(value)
   end

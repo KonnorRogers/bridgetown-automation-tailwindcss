@@ -4,7 +4,7 @@ require "thor"
 
 module TailwindCss
   module Utils
-    class Actions < Thor
+    class Action < Thor
       include Thor::Actions
     end
     # @see https://ruby-doc.org/core-2.7.1/Regexp.html#class-Regexp-label-Capturing

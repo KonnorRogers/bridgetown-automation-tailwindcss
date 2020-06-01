@@ -6,7 +6,7 @@ require_relative "utils"
 module Bridgetown
   module Commands
     class TailwindInit < Bridgetown::Command
-      ACTIONS = TailwindCss::Utils::Actions.new
+      ACTION = TailwindCss::Utils::Action.new
 
       class << self
         def init_with_program(prog)
@@ -31,8 +31,8 @@ module Bridgetown
           webpack_config = File.expand_path("webpack.config.js")
           tailwind_config = File.expand_path("tailwind.config.js")
 
-          ACTIONS.create_file(webpack_config, webpack_file_contents)
-          ACTIONS.create_file(tailwind_config, tailwind_config_contents)
+          ACTION.create_file(webpack_config, webpack_file_contents)
+          ACTION.create_file(tailwind_config, tailwind_config_contents)
           prepend_to_stylesheet
         end
 
@@ -42,7 +42,7 @@ module Bridgetown
 
           return unless File.exist?(frontend_stylesheet)
 
-          ACTIONS.prepend_to_file(frontend_stylesheet, import_tailwind_contents)
+          ACTION.prepend_to_file(frontend_stylesheet, import_tailwind_contents)
         end
 
         def import_tailwind_contents
