@@ -52,7 +52,6 @@ module TailwindCss
           GSUB_REGEX.match(File.read(file))
         end
 
-
         def version_files
           package_json = File.expand_path("package.json")
           version_file = File.expand_path(File.join(__dir__, "version.rb"))
