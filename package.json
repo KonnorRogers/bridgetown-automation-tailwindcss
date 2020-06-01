@@ -1,6 +1,6 @@
 {
   "name": "bridgetown-plugin-tailwindcss",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "main": "frontend/javascript/index.js",
   "repository": {
     "type": "git",

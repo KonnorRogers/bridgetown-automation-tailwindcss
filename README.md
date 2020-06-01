@@ -66,7 +66,7 @@ bridgetown tailwind_init
 
 # ...
 group :bridgetown_plugins do
-  gem "bridgetown-plugin-tailwindcss", "~> 0.1.12"
+  gem "bridgetown-plugin-tailwindcss", "~> 0.1.13"
 end
 ```
 
