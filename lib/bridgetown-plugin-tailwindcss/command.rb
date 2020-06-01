@@ -14,7 +14,7 @@ class TailwindInit < Bridgetown::Command
         # c.option 'path', '--path', 'Choose the path to install tailwind'
 
         c.action do |_args, _options|
-          run
+          Bridgetown::Commands::TailwindInit.run
         end
       end
     end
@@ -198,4 +198,3 @@ class TailwindInit < Bridgetown::Command
   end
 end
 
-Bridgetown::TailwindCss::Commands.register
