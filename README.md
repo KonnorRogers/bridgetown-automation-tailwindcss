@@ -54,6 +54,13 @@ plugin's GitHub repo so the plugin or theme will show up on [Bridgetown's offici
 
 ## Usage
 
+
+```bash
+bridgetown new mysite
+cd mysite
+bridgetown tailwind_init
+```
+
 ```ruby
 # Gemfile
 
@@ -61,12 +68,6 @@ plugin's GitHub repo so the plugin or theme will show up on [Bridgetown's offici
 group :bridgetown_plugins do
   gem "bridgetown-plugin-tailwindcss", "~> 0.1.12"
 end
-```
-
-```bash
-bridgetown new mysite
-cd mysite
-bridgetown tailwind_init
 ```
 
 ## Issues
