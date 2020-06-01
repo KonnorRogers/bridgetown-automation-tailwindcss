@@ -58,7 +58,7 @@ module Bridgetown
           <<~TAILWIND
             module.exports = {
               purge: {
-                enabled: true,
+                mode: 'production',
                 content: ['./src/**/*.html'],
               },
               theme: {
