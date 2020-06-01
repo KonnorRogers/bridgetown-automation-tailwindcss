@@ -5,7 +5,7 @@ require_relative "utils"
 
 module Bridgetown
   module Commands
-    class TailwindInit < Bridgetown::Command
+    class TailwindInit < Command
       ACTIONS = TailwindCss::Utils::Actions.new
 
       class << self
