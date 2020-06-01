@@ -16,7 +16,7 @@ module Bridgetown
             # c.option 'path', '--path', 'Choose the path to install tailwind'
 
             c.action do |_args, _options|
-              run
+              Bridgetown::Commands::TailwindInit.new.run
             end
           end
         end
