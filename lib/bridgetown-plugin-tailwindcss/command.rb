@@ -36,7 +36,6 @@ module Bridgetown
           prepend_to_stylesheet
         end
 
-
         def prepend_to_stylesheet
           frontend_stylesheet = File.join("frontend", "styles", "index.scss")
           frontend_stylesheet = File.expand_path(frontend_stylesheet)
