@@ -27,8 +27,10 @@ module TailwindCss
         def bump_version_to_string(string)
           say("Bumping from #{VERSION} to #{string}", :red)
 
+          match = GSUB_REGEX.match(File.read(file))
+          gsub_string = "#{match[:version]}#{string}"
           version_files.each do |file|
-            gsub_file(file, GSUB_REGEX, string)
+            gsub_file(file, GSUB_REGEX, gsub_string)
           end
         end
 
@@ -37,7 +39,7 @@ module TailwindCss
 
           version_files.each do |file|
             match = GSUB_REGEX.match(File.read(file))
-            gsub_string = "#{match[:version]}#{to_version(type, version: version)}\""
+            gsub_string = "#{match[:version]}#{to_version(type, version: version)}"
 
             gsub_file(file, GSUB_REGEX,
                       gsub_string)
@@ -45,6 +47,11 @@ module TailwindCss
         end
 
         private
+
+        def gsub_match(file)
+          GSUB_REGEX.match(File.read(file))
+        end
+
 
         def version_files
           package_json = File.expand_path("package.json")
