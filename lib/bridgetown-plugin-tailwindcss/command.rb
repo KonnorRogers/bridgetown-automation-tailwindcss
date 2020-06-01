@@ -21,11 +21,11 @@ module Bridgetown
           end
         end
 
-        private
-
         def run
           write_files
         end
+
+        private
 
         def write_files
           webpack_config = File.expand_path("webpack.config.js")
