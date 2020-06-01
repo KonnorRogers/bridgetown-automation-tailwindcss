@@ -1,13 +1,17 @@
 # frozen_string_literal: true
 
 require "bundler/gem_tasks"
-require "rspec/core/rake_task"
+require 'rake/testtask'
 require "./lib/bridgetown-plugin-tailwindcss/utils"
 
-RSpec::Core::RakeTask.new(:spec)
+Rake::TestTask.new(:test) do |task|
+  t.libs << "test"
+  t.libs << "lib"
+  t.test_files = FileList["test/*_test.rb", "test/test_*.rb"]
+end
 
-task :default => :spec
-task :test => :spec
+task :default => :test
+task :spec => :test
 
 task :deploy do
   Rake.sh "./script/release"
