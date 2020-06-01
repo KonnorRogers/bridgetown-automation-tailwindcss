@@ -19,6 +19,7 @@ GEMSPEC_FILE = File.join(ROOT_DIR, "#{PLUGIN_NAME}.gemspec")
 NPM_TARBALL = File.join(ROOT_DIR, "#{PLUGIN_NAME}-v#{TailwindCss::VERSION}.tgz")
 
 TEST_DIR = File.expand_path(__dir__)
+
 TEST_APP = File.expand_path("test_app")
 TEST_APP_GEMFILE = File.join(TEST_APP, "Gemfile")
 
@@ -45,7 +46,7 @@ def create_bridgetown_app
   THOR.append_to_file(TEST_APP_GEMFILE) do
     <<~GEMFILE
       group :bridgetown_plugins do
-        'bridgetown-plugin-tailwindcss', '#{TailwindCss::VERSION}'
+        gem 'bridgetown-plugin-tailwindcss', '#{TailwindCss::VERSION}'
       end
     GEMFILE
   end
