@@ -58,8 +58,9 @@ plugin's GitHub repo so the plugin or theme will show up on [Bridgetown's offici
 ```bash
 bridgetown new mysite
 cd mysite
-bridgetown tailwind_init
 ```
+
+Edit your `Gemfile` to include `bridgetown-plugin-tailwindcss`
 
 ```ruby
 # Gemfile
@@ -70,6 +71,8 @@ group :bridgetown_plugins do
   gem "bridgetown-plugin-tailwindcss", "~> 0.1.13"
 end
 ```
+
+Now go back to the terminal and run the following:
 
 ## Issues
 
