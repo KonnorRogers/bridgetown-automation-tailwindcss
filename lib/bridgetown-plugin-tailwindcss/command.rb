@@ -14,17 +14,16 @@ class TailwindInit < Bridgetown::Command
         # c.option 'path', '--path', 'Choose the path to install tailwind'
 
         c.action do |_args, _options|
-          Bridgetown::Commands::TailwindInit.new.run
+          run
         end
       end
     end
 
+    private
+
     def run
       write_files
     end
-
-    private
-
     def write_files
       webpack_config = File.expand_path("webpack.config.js")
       tailwind_config = File.expand_path("tailwind.config.js")
@@ -198,3 +197,5 @@ class TailwindInit < Bridgetown::Command
     end
   end
 end
+
+Bridgetown::TailwindCss::Commands.register
