@@ -53,12 +53,17 @@ where friendly folks are standing by to help you build and release your plugin o
 plugin's GitHub repo so the plugin or theme will show up on [Bridgetown's official Plugin Directory](https://www.bridgetownrb.com/plugins)! (There may be a day or so delay before you see it appear.)
 
 
+```ruby
+# Gemfile
 
-```javascript
-// frontend/styles/index.js
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+# ...
+group :bridgetown_plugins do
+  gem "bridgetown-plugin-tailwindcss", "~> 0.1.12"
+end
+```
 
-// ...
+```bash
+bridgetown new mysite
+cd mysite
+bridgetown tailwind_init
 ```
