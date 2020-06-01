@@ -104,7 +104,7 @@ module Bridgetown
               module: {
                 rules: [
                   {
-                    test: /\.(js|jsx)/,
+                    test: /.(js|jsx)/,
                     use: {
                       loader: "babel-loader",
                       options: {
@@ -122,7 +122,7 @@ module Bridgetown
                     },
                   },
                   {
-                    test: /\.(s[ac]|c)ss$/,
+                    test: /.(s[ac]|c)ss$/,
                     use: [
                       MiniCssExtractPlugin.loader,
                       "css-loader",
@@ -137,21 +137,21 @@ module Bridgetown
                           },
                         },
                       },
+                      {
+                        loader: "postcss-loader",
+                        options: {
+                          ident: "postcss",
+                          plugins: [
+                            require("postcss-import"),
+                            require("tailwindcss"),
+                            require("autoprefixer"),
+                          ],
+                        },
+                      },
                     ],
                   },
                   {
-                    loader: "postcss-loader",
-                    options: {
-                      ident: "postcss",
-                      plugins: [
-                        require("postcss-import"),
-                        require("tailwindcss"),
-                        require("autoprefixer"),
-                      ],
-                    },
-                  },
-                  {
-                    test: /\.woff2?$|\.ttf$|\.eot$|\.svg$/,
+                    test: /.woff2?$|.ttf$|.eot$|.svg$/,
                     loader: "file-loader",
                     options: {
                       outputPath: "../fonts",
@@ -161,7 +161,6 @@ module Bridgetown
                 ],
               },
             };
-
           WEBPACK
         end
       end
