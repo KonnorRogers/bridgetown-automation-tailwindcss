@@ -14,8 +14,8 @@
     "frontend"
   ],
   "dependencies": {
-    "postcss-import": "^0.1.4",
-    "postcss-loader": "^0.1.4",
-    "tailwindcss": "^0.1.4"
+    "postcss-import": "^12.0.1",
+    "postcss-loader": "^3.0.0",
+    "tailwindcss": "^1.4.6"
   }
 }
