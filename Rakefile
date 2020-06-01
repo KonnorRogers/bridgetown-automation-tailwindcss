@@ -5,9 +5,9 @@ require 'rake/testtask'
 require "./lib/bridgetown-plugin-tailwindcss/utils"
 
 Rake::TestTask.new(:test) do |task|
-  t.libs << "test"
-  t.libs << "lib"
-  t.test_files = FileList["test/*_test.rb", "test/test_*.rb"]
+  task.libs << "test"
+  task.libs << "lib"
+  task.test_files = FileList["test/*_test.rb", "test/test_*.rb"]
 end
 
 task :default => :test
