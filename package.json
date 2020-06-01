@@ -1,6 +1,6 @@
 {
   "name": "bridgetown-plugin-tailwindcss",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "main": "frontend/javascript/index.js",
   "repository": {
     "type": "git",
@@ -14,8 +14,8 @@
     "frontend"
   ],
   "dependencies": {
-    "postcss-import": "^12.0.1",
-    "postcss-loader": "^3.0.0",
-    "tailwindcss": "^1.4.6"
+    "postcss-import": "^0.1.5",
+    "postcss-loader": "^0.1.5",
+    "tailwindcss": "^0.1.5"
   }
 }
