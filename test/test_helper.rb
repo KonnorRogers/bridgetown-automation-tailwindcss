@@ -37,7 +37,6 @@ def create_bridgetown_app
   Rake.sh("bundle install")
   Rake.sh("bundle exec bridgetown new . --force")
   Rake.sh("bundle add bridgetown-plugin-tailwindcss -g bridgetown_plugins")
-
   Rake.sh("yarn add #{NPM_TARBALL}")
   Rake.sh("bundle install")
   Rake.sh("bridgetown tailwind_init")
