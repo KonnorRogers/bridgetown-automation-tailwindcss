@@ -12,7 +12,11 @@ module TailwindCss
     class Bump < Thor
       include Thor::Actions
 
+      RUBY_VERSION_REGEX = %r!(.*VERSION.?=.*)!.freeze
+      NPM_VERSION_REGEX = %r!(.*"version":.*)!.freeze
+      VERSION_LINE = Regexp.union(RUBY_VERSION_REGEX, NPM_VERSION_REGEX)
       VERSION_REGEX = %r!(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)!.freeze
+      GSUB_REGEX = %r!(?<version>#{VERSION_LINE})#{VERSION_REGEX}!.freeze
 
       # rubocop:disable Metrics/BlockLength
       no_commands do
@@ -24,29 +28,36 @@ module TailwindCss
           say("Bumping from #{VERSION} to #{string}", :red)
 
           version_files.each do |file|
-            gsub_file(file, VERSION_REGEX, string)
+            gsub_file(file, GSUB_REGEX, string)
           end
         end
 
-        def bump_version(type, version: VERSION, value: nil)
-          say(version_change(type, version: version, value: value), :red)
+        def bump_version(type, version: VERSION)
+          say(version_change(type, version: version), :red)
 
           version_files.each do |file|
-            gsub_file(file, VERSION_REGEX,
-                      to_version(type, version: version, value: value))
+            match = GSUB_REGEX.match(File.read(file))
+            gsub_string = "#{match[:version]}#{to_version(type, version: version)}\""
+
+            gsub_file(file, GSUB_REGEX,
+                      gsub_string)
           end
         end
 
         private
 
         def version_files
-          @package_json = File.expand_path("package.json")
-          @version_file = File.expand_path(File.join(__dir__, "version.rb"))
+          package_json = File.expand_path("package.json")
+          version_file = File.expand_path(File.join(__dir__, "version.rb"))
 
-          [@package_json, @version_file]
+          [package_json, version_file]
         end
 
-        def to_version(type, version: nil, value: nil)
+        # ef version_replacement
+        #   match = GSUB_REGEX.match(File.readlines
+        # end
+
+        def to_version(type, version: nil)
           from = version
           match = VERSION_REGEX.match(from)
 
@@ -61,7 +72,7 @@ module TailwindCss
                   #{groups.keys}"
           end
 
-          groups[type] = value || (groups[type].to_i + 1).to_s
+          groups[type] = (groups[type].to_i + 1).to_s
 
           bump_to_zero(type, groups)
 
@@ -78,8 +89,8 @@ module TailwindCss
           groups[:minor] = "0"
         end
 
-        def version_change(type, version: nil, value: nil)
-          "Bumping from #{version} to #{to_version(type, version: version, value: value)}"
+        def version_change(type, version: nil)
+          "Bumping from #{version} to #{to_version(type, version: version)}"
         end
       end
       # rubocop:enable Metrics/BlockLength
