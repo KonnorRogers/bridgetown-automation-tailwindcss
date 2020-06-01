@@ -5,6 +5,7 @@ require "rake"
 require "minitest/autorun"
 require "bridgetown"
 require "thor"
+require "bridgetown-plugin-tailwindcss"
 
 Bridgetown.logger.log_level = :error
 
@@ -19,6 +20,7 @@ NPM_TARBALL = File.join(ROOT_DIR, "#{PLUGIN_NAME}-v#{TailwindCss::VERSION}.tgz")
 
 TEST_DIR = File.expand_path(__dir__)
 TEST_APP = File.expand_path("test_app")
+TEST_APP_GEMFILE = File.join(TEST_APP, "Gemfile")
 
 def install_packages
   Rake.sh("rake install:local")
@@ -40,7 +42,7 @@ def create_bridgetown_app
   Rake.sh("bundle install")
   Rake.sh("bundle exec bridgetown new . --force")
 
-  THOR.append_to_file(TEST_APP) do
+  THOR.append_to_file(TEST_APP_GEMFILE) do
     <<~GEMFILE
       group :bridgetown_plugins do
         'bridgetown-plugin-tailwindcss', '#{TailwindCss::VERSION}'
