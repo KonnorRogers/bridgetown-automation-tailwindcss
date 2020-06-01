@@ -107,6 +107,23 @@ brace-expansion@^1.1.7:
     balanced-match "^1.0.0"
     concat-map "0.0.1"
 
+bridgetown-plugin-tailwindcss@/home/krog/projects/ruby/bridgetown-plugin-tailwindcss/bridgetown-plugin-tailwindcss-v0.1.13.tgz:
+  version "0.1.13"
+  resolved "/home/krog/projects/ruby/bridgetown-plugin-tailwindcss/bridgetown-plugin-tailwindcss-v0.1.13.tgz#95c0bfd79ae3e004d32b5689a7edd9946b8fc0a0"
+  dependencies:
+    postcss-import "^12.0.1"
+    postcss-loader "^3.0.0"
+    tailwindcss "^1.4.6"
+
+"bridgetown-plugin-tailwindcss@file:bridgetown-plugin-tailwindcss-v0.1.13.tgz":
+  version "0.1.13"
+  resolved "file:bridgetown-plugin-tailwindcss-v0.1.13.tgz#6ed210f22361f53e834419da5ec20e21d5cdd73f"
+  dependencies:
+    bridgetown-plugin-tailwindcss "file:bridgetown-plugin-tailwindcss-v0.1.13.tgz"
+    postcss-import "^12.0.1"
+    postcss-loader "^3.0.0"
+    tailwindcss "^1.4.6"
+
 browserslist@^4.12.0:
   version "4.12.0"
   resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.12.0.tgz#06c6d5715a1ede6c51fc39ff67fd647f740b656d"
