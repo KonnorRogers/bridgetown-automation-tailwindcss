@@ -56,9 +56,24 @@ plugin's GitHub repo so the plugin or theme will show up on [Bridgetown's offici
 
 
 ```bash
-bridgetown new mysite
+mkdir mysite
 cd mysite
-bridgetown tailwind_init
+touch Gemfile
+```
+
+Add the following to your Gemfile:
+
+```ruby
+gem "bridgetown", "~> 0.15.0.beta"
+```
+
+Now go back to the terminal and run:
+
+```bash
+bundle install
+bridgetown new . --force
+bundle add bridgetown-plugin-tailwindcss -g bridgetown_plugins
+bridgetown tailwind init
 ```
 
 ```ruby
@@ -69,6 +84,15 @@ group :bridgetown_plugins do
   # ...
   gem "bridgetown-plugin-tailwindcss", "~> 0.1.13"
 end
+```
+
+## Testing
+
+Right now there is one big integration tests which is run via simple:
+
+```bash
+bundle install
+rake test
 ```
 
 ## Issues
