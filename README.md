@@ -24,8 +24,8 @@ The plugin will automatically use any of the following metadata variables if the
 
 ## Testing
 
-* Run `bundle exec rspec` to run the test suite
-* Or run `script/cibuild` to validate with Rubocop and test with rspec together.
+- Run `bundle exec rspec` to run the test suite
+- Or run `script/cibuild` to validate with Rubocop and test with rspec together.
 
 ## Contributing
 
@@ -36,7 +36,7 @@ The plugin will automatically use any of the following metadata variables if the
 5. Push to the branch (`git push origin my-new-feature`)
 6. Create a new Pull Request
 
-----
+---
 
 ## Releasing (you can delete this section in your own plugin repo)
 
@@ -54,7 +54,6 @@ plugin's GitHub repo so the plugin or theme will show up on [Bridgetown's offici
 
 ## Usage
 
-
 ```bash
 mkdir mysite
 cd mysite
@@ -71,9 +70,9 @@ Now go back to the terminal and run:
 
 ```bash
 bundle install
-bridgetown new . --force
+bundle exec bridgetown new . --force
 bundle add bridgetown-plugin-tailwindcss -g bridgetown_plugins
-bridgetown tailwind init
+bundle exec bridgetown tailwind init
 ```
 
 ```ruby
