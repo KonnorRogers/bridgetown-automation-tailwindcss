@@ -62,9 +62,13 @@ class IntegrationTest < Minitest::Test
     Bundler.with_original_env do
       Rake.cd TEST_APP
       Rake.sh('bundle exec bridgetown new . --force')
-      simulate_stdin('y') do
-        Rake.sh("bundle exec bridgetown apply ../bridgetown.automation.rb")
-      end
+
+      # simulate_stdin does not work here, not sure why
+      stdout, stderr, status = Open3.capture3("bundle exec bridgetown apply ../bridgetown.automation.rb",
+                     stdin_data: "y\n")
+
+      puts stdout.read
+      puts stderr.read
     end
 
     run_assertions
