@@ -9,6 +9,12 @@ bundle install
 rake test
 ```
 
+### Testing with Docker
+
+```bash
+./compose.sh up --build
+```
+
 ## Issues
 
 Right now, the script does not do a smart replace of
