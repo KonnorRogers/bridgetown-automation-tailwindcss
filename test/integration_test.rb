@@ -2,6 +2,7 @@
 
 require 'test_helper'
 require 'bundler'
+require 'open3'
 
 CURRENT_BRIDGETOWN_VERSION = '~> 0.15.0.beta2'
 CURRENT_COMMIT = `git rev-parse HEAD`.freeze
@@ -57,25 +58,27 @@ class IntegrationTest < Minitest::Test
     run_assertions
   end
 
-  # def test_it_works_with_remote_automation
-  #   Bundler.with_unbundled_env do
-  #     Rake.sh('bundle install')
-  #     Rake.sh('bundle exec bridgetown new . --force')
+  def test_it_works_with_remote_automation
+    Bundler.with_original_env do
+      Rake.cd TEST_APP
+      Rake.sh('bundle exec bridgetown new . --force')
+      simulate_stdin('y') do
+        Rake.sh("bundle exec bridgetown apply ../bridgetown.automation.rb")
+      end
+    end
 
-  #     simulate_stdin('y') do
-  #       Rake.sh('bundle exec bridgetown apply ../bridgetown.automation.rb')
-  #     end
-  #   end
+    run_assertions
+  end
 
-  #   github_url = "raw.githubusercontent.com"
-  #   user_and_reponame = "ParamagicDev/bridgetown-plugin-tailwindcss"
+  #   # github_url = 'raw.githubusercontent.com'
+  #   # user_and_reponame = 'ParamagicDev/bridgetown-plugin-tailwindcss'
 
-  #   file = "bridgetown.automation.rb"
+  #   # file = 'bridgetown.automation.rb'
 
-  #   url = "#{github_url}/#{user_and_reponame}/#{current_commit_hash}/#{file}"
+  #   # url = "#{github_url}/#{user_and_reponame}/#{current_commit_hash}/#{file}"
 
-  #     Rake.sh("bundle exec bridgetown apply #{url}")
+  #   # Rake.sh("bundle exec bridgetown apply #{url}")
 
-  # run_assertions
+  #   run_assertions
   # end
 end

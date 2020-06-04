@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rake'
-
 ROOT_PATH = File.expand_path(__dir__)
 DIR_NAME = File.basename(ROOT_PATH)
 GITHUB_PATH = "https://github.com/ParamagicDev/#{DIR_NAME}.git"
@@ -11,7 +9,7 @@ TEMPLATE_FILES = File.join(ROOT_PATH, 'templates')
 # I didnt feel it was necessary here.
 # I left this here for reference.
 def require_files(tmpdir = nil)
-  files = Rake::FileList.new('lib/**/*')
+  files = Dir.glob('lib/**/*')
 
   return if files.empty?
 
@@ -52,7 +50,7 @@ def add_yarn_packages
   packages = 'postcss-import postcss-loader tailwindcss'
 
   say "Adding the following yarn packages: #{packages}", :green
-  Rake.sh("yarn add #{packages}")
+  system("yarn add #{packages}")
 end
 
 def add_tailwind_config
