@@ -9,7 +9,7 @@ TEMPLATE_FILES = File.join(ROOT_PATH, 'templates')
 # I didnt feel it was necessary here.
 # I left this here for reference.
 def require_files(tmpdir = nil)
-  files = Rake::FileList("lib/**/*")
+  files = Rake::FileList.new("lib/**/*")
 
   return if files.empty?
 

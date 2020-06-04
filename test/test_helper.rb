@@ -3,8 +3,10 @@
 require "minitest"
 require "minitest/autorun"
 require "rake"
+require "io_test_helpers"
 
 ROOT_DIR = File.expand_path("..", __dir__)
 
+TEMPLATES_DIR = File.join(ROOT_DIR, "templates")
 TEST_DIR = File.expand_path(__dir__)
 TEST_APP = File.expand_path("test_app")
