@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rake'
 
 ROOT_PATH = File.expand_path(__dir__)
@@ -9,13 +11,11 @@ TEMPLATE_FILES = File.join(ROOT_PATH, 'templates')
 # I didnt feel it was necessary here.
 # I left this here for reference.
 def require_files(tmpdir = nil)
-  files = Rake::FileList.new("lib/**/*")
+  files = Rake::FileList.new('lib/**/*')
 
   return if files.empty?
 
-  if tmpdir.nil?
-    return files.each { |file| require File.expand_path(file) }
-  end
+  return files.each { |file| require File.expand_path(file) } if tmpdir.nil?
 
   files.each { |file| require File.join(tmpdir, File.expand_path(file)) }
 end
@@ -29,7 +29,7 @@ def add_template_repository_to_source_path
   if __FILE__ =~ %r{\Ahttps?://}
     require 'tmpdir'
 
-    source_paths.unshift(tempdir = Dir.mktmpdir(DIR_NAME + "-"))
+    source_paths.unshift(tempdir = Dir.mktmpdir(DIR_NAME + '-'))
     at_exit { FileUtils.remove_entry(tempdir) }
     git clone: [
       '--quiet',
@@ -49,14 +49,14 @@ def add_template_repository_to_source_path
 end
 
 def add_yarn_packages
-  packages = "postcss-import postcss-loader tailwindcss"
+  packages = 'postcss-import postcss-loader tailwindcss'
 
   say "Adding the following yarn packages: #{packages}", :green
   Rake.sh("yarn add #{packages}")
 end
 
 def add_tailwind_config
-  filename = "tailwind.config.js"
+  filename = 'tailwind.config.js'
 
   tailwind_config = File.join(TEMPLATE_FILES, filename)
 
@@ -65,8 +65,8 @@ def add_tailwind_config
 end
 
 def import_tailwind_statements
-  filename = "index.scss"
-  style_file = File.join("frontend", "styles", filename)
+  filename = 'index.scss'
+  style_file = File.join('frontend', 'styles', filename)
   template_file = File.join(TEMPLATE_FILES, filename)
 
   say "Prepending to #{style_file} ...", :green
@@ -74,14 +74,13 @@ def import_tailwind_statements
 end
 
 def add_webpack_config
-  filename = "webpack.config.js"
+  filename = 'webpack.config.js'
 
   webpack_config = File.join(TEMPLATE_FILES, filename)
 
   say "Creating #{filename}", :green
   create_file(filename, File.read(webpack_config))
 end
-
 
 add_template_repository_to_source_path
 

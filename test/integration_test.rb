@@ -1,5 +1,10 @@
-require "test_helper"
+# frozen_string_literal: true
+
+require 'test_helper'
 require 'bundler'
+
+CURRENT_BRIDGETOWN_VERSION = '~> 0.15.0.beta2'
+CURRENT_COMMIT = `git rev-parse HEAD`.freeze
 
 class IntegrationTest < Minitest::Test
   include TailwindCss::IoTestHelpers
@@ -8,7 +13,13 @@ class IntegrationTest < Minitest::Test
     Rake.rm_rf(TEST_APP)
     Rake.mkdir_p(TEST_APP)
     Rake.cd(TEST_APP)
-    Rake.sh("bundle install")
+    write_to_gemfile
+  end
+
+  def write_to_gemfile
+    File.open(TEST_GEMFILE, 'a') do |file|
+      file.puts "gem 'bridgetown', '#{CURRENT_BRIDGETOWN_VERSION}'"
+    end
   end
 
   def read_test_file(filename)
@@ -19,25 +30,21 @@ class IntegrationTest < Minitest::Test
     File.read(File.join(TEMPLATES_DIR, filename))
   end
 
-  def current_commit_hash
-    %x(cd .. && git rev-parse HEAD)
-  end
-
   def run_assertions
-    tailwind = "tailwind.config.js"
+    tailwind = 'tailwind.config.js'
     test_tailwind_file = read_test_file(tailwind)
     template_tailwind_file = read_template_file(tailwind)
 
     assert_equal(test_tailwind_file, template_tailwind_file)
 
-    webpack = "webpack.config.js"
+    webpack = 'webpack.config.js'
     test_webpack_file = read_test_file(webpack)
     template_webpack_file = read_template_file(webpack)
 
     assert_equal(test_webpack_file, template_webpack_file)
 
-    styles = "index.scss"
-    styles_test_path = File.join("frontend", "styles", styles)
+    styles = 'index.scss'
+    styles_test_path = File.join('frontend', 'styles', styles)
 
     test_styles_file = read_test_file(styles_test_path)
     template_styles_file = read_template_file(styles)
@@ -55,21 +62,23 @@ class IntegrationTest < Minitest::Test
   # end
 
   def test_it_works_with_remote_automation
-    Rake.sh("bundle exec bridgetown new . --force")
+    Bundler.with_unbundled_env do
+      Rake.sh('bundle install')
+      Rake.sh('bundle exec bridgetown new . --force')
 
-  #   github_url = "raw.githubusercontent.com"
-  #   user_and_reponame = "ParamagicDev/bridgetown-plugin-tailwindcss"
-
-  #   file = "bridgetown.automation.rb"
-
-  #   url = "#{github_url}/#{user_and_reponame}/#{current_commit_hash}/#{file}"
-
-    simulate_stdin("y") do
-  #     Rake.sh("bundle exec bridgetown apply #{url}")
-      Bundler.with_original_env do
-        Rake.sh("bridgetown apply ../bridgetown.automation.rb")
+      simulate_stdin('y') do
+        Rake.sh('bundle exec bridgetown apply ../bridgetown.automation.rb')
       end
     end
+
+    #   github_url = "raw.githubusercontent.com"
+    #   user_and_reponame = "ParamagicDev/bridgetown-plugin-tailwindcss"
+
+    #   file = "bridgetown.automation.rb"
+
+    #   url = "#{github_url}/#{user_and_reponame}/#{current_commit_hash}/#{file}"
+
+    #     Rake.sh("bundle exec bridgetown apply #{url}")
 
     run_assertions
   end
