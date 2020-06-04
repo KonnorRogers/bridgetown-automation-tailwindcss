@@ -12,7 +12,7 @@ FROM builder as bridgetownrb-app
 ARG USER_ID=${USER_ID:-1000}
 ARG GROUP_ID=${GROUP_ID:-1000}
 ARG DOCKER_USER=${DOCKER_USER:-user}
-ARG APP_DIR=${APP_DIR:-/home/$USER/bridgetown-app}
+ARG APP_DIR=${APP_DIR:-/home/user/bridgetown-app}
 
 # Create a non-root user
 RUN addgroup -g $GROUP_ID -S $GROUP_ID
