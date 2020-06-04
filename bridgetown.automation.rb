@@ -1,12 +1,17 @@
 require 'rake'
 
-
-
-DIR_NAME = File.basename(File.expand_path(__dir__))
+ROOT_PATH = File.expand_path(__dir__)
+DIR_NAME = File.basename(ROOT_PATH)
 GITHUB_PATH = "https://github.com/ParamagicDev/#{DIR_NAME}.git"
+TEMPLATE_FILES = File.join(ROOT_PATH, 'templates')
 
+# If you have a lib directory, use this method.
+# I didnt feel it was necessary here.
+# I left this here for reference.
 def require_files(tmpdir = nil)
   files = Rake::FileList("lib/**/*")
+
+  return if files.empty?
 
   if tmpdir.nil?
     return files.each { |file| require File.expand_path(file) }
@@ -43,7 +48,33 @@ def add_template_repository_to_source_path
   end
 end
 
+def add_yarn_packages
+  packages = "postcss-import postcss-loader tailwindcss"
+  Rake.sh("yarn add #{packages}")
+end
+
+def add_tailwind_config
+  filename = "tailwind.config.js"
+
+  tailwind_config = File.join(TEMPLATE_FILES, filename)
+
+  create_file(filename, tailwind_config)
+end
+
+def import_tailwind_statements
+  tailwind_import_statement = File.join(TEMPLATE_FILES, "index.scss")
+  javascript_import(File.read(tailwind_import_statement))
+end
+
+def add_webpack_config
+  filename = "webpack.config.js"
+
+  webpack_config = File.join(TEMPLATE_FILES, filename)
+
+  create_file(filename, webpack_config)
+end
+
+
 add_template_repository_to_source_path
 
-packages = "postcss-import postcss-loader tailwindcss"
 say("Hello there")
