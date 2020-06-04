@@ -45,18 +45,18 @@ class IntegrationTest < Minitest::Test
     assert test_styles_file.include?(template_styles_file)
   end
 
-  def test_it_works_with_local_automation
-    Bundler.with_original_env do
-      Rake.cd TEST_APP
+  # def test_it_works_with_local_automation
+  #   Bundler.with_original_env do
+  #     Rake.cd TEST_APP
 
-      # This has to overwrite `webpack.config.js` so it needs input
-      simulate_stdin('y') do
-        Rake.sh("bundle exec bridgetown new . --force --apply='../bridgetown.automation.rb'")
-      end
-    end
+  #     # This has to overwrite `webpack.config.js` so it needs input
+  #     simulate_stdin('y') do
+  #       Rake.sh("bundle exec bridgetown new . --force --apply='../bridgetown.automation.rb'")
+  #     end
+  #   end
 
-    run_assertions
-  end
+  #   run_assertions
+  # end
 
   def test_it_works_with_remote_automation
     Bundler.with_original_env do
@@ -64,11 +64,12 @@ class IntegrationTest < Minitest::Test
       Rake.sh('bundle exec bridgetown new . --force')
 
       # simulate_stdin does not work here, not sure why
-      stdout, stderr, status = Open3.capture3("bundle exec bridgetown apply ../bridgetown.automation.rb",
-                     stdin_data: "y\n")
+      stdout, stderr, status = Open3.capture3('bundle exec bridgetown apply ../bridgetown.automation.rb',
+                                              stdin_data: "y\n")
 
       puts stdout
       puts stderr
+      puts status
     end
 
     run_assertions
