@@ -67,8 +67,8 @@ class IntegrationTest < Minitest::Test
       stdout, stderr, status = Open3.capture3("bundle exec bridgetown apply ../bridgetown.automation.rb",
                      stdin_data: "y\n")
 
-      puts stdout.read
-      puts stderr.read
+      puts stdout
+      puts stderr
     end
 
     run_assertions
