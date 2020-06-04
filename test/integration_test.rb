@@ -12,14 +12,6 @@ class IntegrationTest < Minitest::Test
   def setup
     Rake.rm_rf(TEST_APP)
     Rake.mkdir_p(TEST_APP)
-    Rake.cd(TEST_APP)
-    write_to_gemfile
-  end
-
-  def write_to_gemfile
-    File.open(TEST_GEMFILE, 'a') do |file|
-      file.puts "gem 'bridgetown', '#{CURRENT_BRIDGETOWN_VERSION}'"
-    end
   end
 
   def read_test_file(filename)
@@ -52,34 +44,38 @@ class IntegrationTest < Minitest::Test
     assert test_styles_file.include?(template_styles_file)
   end
 
-  # def test_it_works_with_local_automation
-  #   # This has to overwrite `webpack.config.js` so it needs input
-  #   simulate_stdin("y") do
-  #     Rake.sh("bundle exec bridgetown new . --force --apply='../bridgetown.automation.rb'")
-  #   end
+  def test_it_works_with_local_automation
+    Bundler.with_original_env do
+      Rake.cd TEST_APP
 
-  #   run_assertions
-  # end
-
-  def test_it_works_with_remote_automation
-    Bundler.with_unbundled_env do
-      Rake.sh('bundle install')
-      Rake.sh('bundle exec bridgetown new . --force')
-
+      # This has to overwrite `webpack.config.js` so it needs input
       simulate_stdin('y') do
-        Rake.sh('bundle exec bridgetown apply ../bridgetown.automation.rb')
+        Rake.sh("bundle exec bridgetown new . --force --apply='../bridgetown.automation.rb'")
       end
     end
 
-    #   github_url = "raw.githubusercontent.com"
-    #   user_and_reponame = "ParamagicDev/bridgetown-plugin-tailwindcss"
-
-    #   file = "bridgetown.automation.rb"
-
-    #   url = "#{github_url}/#{user_and_reponame}/#{current_commit_hash}/#{file}"
-
-    #     Rake.sh("bundle exec bridgetown apply #{url}")
-
     run_assertions
   end
+
+  # def test_it_works_with_remote_automation
+  #   Bundler.with_unbundled_env do
+  #     Rake.sh('bundle install')
+  #     Rake.sh('bundle exec bridgetown new . --force')
+
+  #     simulate_stdin('y') do
+  #       Rake.sh('bundle exec bridgetown apply ../bridgetown.automation.rb')
+  #     end
+  #   end
+
+  #   github_url = "raw.githubusercontent.com"
+  #   user_and_reponame = "ParamagicDev/bridgetown-plugin-tailwindcss"
+
+  #   file = "bridgetown.automation.rb"
+
+  #   url = "#{github_url}/#{user_and_reponame}/#{current_commit_hash}/#{file}"
+
+  #     Rake.sh("bundle exec bridgetown apply #{url}")
+
+  # run_assertions
+  # end
 end
