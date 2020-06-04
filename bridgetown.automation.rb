@@ -50,6 +50,8 @@ end
 
 def add_yarn_packages
   packages = "postcss-import postcss-loader tailwindcss"
+
+  say "Adding the following yarn packages: #{packages}", :green
   Rake.sh("yarn add #{packages}")
 end
 
@@ -58,12 +60,17 @@ def add_tailwind_config
 
   tailwind_config = File.join(TEMPLATE_FILES, filename)
 
-  create_file(filename, tailwind_config)
+  say "Creating #{filename} ...", :green
+  create_file(filename, File.read(tailwind_config))
 end
 
 def import_tailwind_statements
-  tailwind_import_statement = File.join(TEMPLATE_FILES, "index.scss")
-  javascript_import(File.read(tailwind_import_statement))
+  filename = "index.scss"
+  style_file = File.join("frontend", "styles", filename)
+  template_file = File.join(TEMPLATE_FILES, filename)
+
+  say "Prepending to #{style_file} ...", :green
+  prepend_to_file(style_file, File.read(template_file))
 end
 
 def add_webpack_config
@@ -71,10 +78,14 @@ def add_webpack_config
 
   webpack_config = File.join(TEMPLATE_FILES, filename)
 
-  create_file(filename, webpack_config)
+  say "Creating #{filename}", :green
+  create_file(filename, File.read(webpack_config))
 end
 
 
 add_template_repository_to_source_path
 
-say("Hello there")
+add_tailwind_config
+add_webpack_config
+import_tailwind_statements
+add_yarn_packages
