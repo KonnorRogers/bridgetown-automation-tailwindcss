@@ -4,7 +4,7 @@ require 'bundler'
 class IntegrationTest < Minitest::Test
   include TailwindCss::IoTestHelpers
 
-  def run_setup
+  def setup
     Rake.rm_rf(TEST_APP)
     Rake.mkdir_p(TEST_APP)
     Rake.cd(TEST_APP)
@@ -20,7 +20,7 @@ class IntegrationTest < Minitest::Test
   end
 
   def current_commit_hash
-    %x(git rev-parse HEAD)
+    %x(cd .. && git rev-parse HEAD)
   end
 
   def run_assertions
@@ -45,29 +45,30 @@ class IntegrationTest < Minitest::Test
     assert test_styles_file.include?(template_styles_file)
   end
 
-  def test_it_works_with_local_automation
-    run_setup
+  # def test_it_works_with_local_automation
+  #   # This has to overwrite `webpack.config.js` so it needs input
+  #   simulate_stdin("y") do
+  #     Rake.sh("bundle exec bridgetown new . --force --apply='../bridgetown.automation.rb'")
+  #   end
 
-    # This has to overwrite `webpack.config.js` so it needs input
-    simulate_stdin("y") do
-      Rake.sh("bundle exec bridgetown new . --force --apply='../bridgetown.automation.rb'")
-    end
-
-    run_assertions
-  end
+  #   run_assertions
+  # end
 
   def test_it_works_with_remote_automation
     Rake.sh("bundle exec bridgetown new . --force")
 
-    github_url = "raw.githubusercontent.com"
-    user_and_reponame = "ParamagicDev/bridgetown-plugin-tailwindcss"
+  #   github_url = "raw.githubusercontent.com"
+  #   user_and_reponame = "ParamagicDev/bridgetown-plugin-tailwindcss"
 
-    file = "bridgetown.automation.rb"
+  #   file = "bridgetown.automation.rb"
 
-    url = "#{github_url}/#{user_and_reponame}/#{current_commit_hash}/#{file}"
+  #   url = "#{github_url}/#{user_and_reponame}/#{current_commit_hash}/#{file}"
 
     simulate_stdin("y") do
-      Rake.sh("bundle exec bridgetown apply #{url}")
+  #     Rake.sh("bundle exec bridgetown apply #{url}")
+      Bundler.with_original_env do
+        Rake.sh("bridgetown apply ../bridgetown.automation.rb")
+      end
     end
 
     run_assertions
