@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 require "bridgetown"
-require "bridgetown-plugin-tailwindcss/command.rb"
-require "bridgetown-plugin-tailwindcss/utils.rb"
+require "bridgetown-plugin-tailwindcss/io_test_helpers.rb"
 
-Bridgetown::PluginManager.new_source_manifest(
-  origin: TailwindCss
-)
+module TailwindCss
+end
