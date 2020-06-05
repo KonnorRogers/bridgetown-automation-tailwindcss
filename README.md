@@ -1,3 +1,15 @@
+## Prerequisites
+
+Bridgetown ~> 0.15.0
+
+```bash
+bridgetown -v
+bridgetown 0.15.0.beta2 "Overlook"
+```
+
+This project requires the new `apply` command introduced in Bridgetown
+`0.15.0`
+
 ## Usage
 
 ### New project
