@@ -4,7 +4,7 @@ require 'fileutils'
 require 'shellwords'
 
 GIT_ROOT = File.expand_path(__dir__)
-DIR_NAME = File.basename(GIT_PATH)
+DIR_NAME = File.basename(GIT_ROOT)
 GITHUB_PATH = "https://github.com/ParamagicDev/#{DIR_NAME}.git"
 TEMPLATE_FILES = File.join(GIT_ROOT, 'templates')
 
