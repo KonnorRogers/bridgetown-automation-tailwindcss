@@ -3,10 +3,14 @@
 require 'fileutils'
 require 'shellwords'
 
+@current_dir = File.expand_path(__dir__)
 ROOT_PATH = File.expand_path(__dir__)
 DIR_NAME = 'bridgetown-plugin-tailwindcss'
 GITHUB_PATH = "https://github.com/ParamagicDev/#{DIR_NAME}.git"
-TEMPLATE_DIR = File.join(ROOT_PATH, 'templates')
+
+def template_dir
+  File.join(@current_dir, 'templates')
+end
 
 # I didnt feel it was necessary here.
 # I left this here for reference.
@@ -36,6 +40,7 @@ def add_template_repository_to_source_path
     if (branch = __FILE__[%r{#{DIR_NAME}/(.+)/bridgetown.automation.rb}, 1])
       Dir.chdir(tempdir) { system("git checkout #{branch}") }
       require_files(tempdir)
+      @current_dir = File.expand_path(tempdir)
     end
   else
     source_paths.unshift(DIR_NAME)
@@ -53,7 +58,7 @@ end
 def add_tailwind_config
   filename = 'tailwind.config.js'
 
-  tailwind_config = File.join(TEMPLATE_DIR, filename)
+  tailwind_config = File.join(template_dir, filename)
 
   say "Creating #{filename} ...", :green
   create_file(filename, File.read(tailwind_config))
@@ -62,7 +67,7 @@ end
 def import_tailwind_statements
   filename = 'index.scss'
   style_file = File.join('frontend', 'styles', filename)
-  template_file = File.join(TEMPLATE_DIR, filename)
+  template_file = File.join(template_dir, filename)
 
   say "Prepending to #{style_file} ...", :green
   prepend_to_file(style_file, File.read(template_file))
@@ -71,7 +76,7 @@ end
 def add_webpack_config
   filename = 'webpack.config.js'
 
-  webpack_config = File.join(TEMPLATE_DIR, filename)
+  webpack_config = File.join(template_dir, filename)
 
   say "Creating #{filename}", :green
 
