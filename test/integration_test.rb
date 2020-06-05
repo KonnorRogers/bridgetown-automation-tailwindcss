@@ -69,7 +69,7 @@ class IntegrationTest < Minitest::Test
 
       file = 'bridgetown.automation.rb'
 
-      url = "#{github_url}/#{user_and_reponame}/#{current_commit_hash}/#{file}"
+      url = "#{github_url}/#{user_and_reponame}/#{CURRENT_COMMIT}/#{file}"
 
       Rake.sh("bridgetown apply #{url}")
     end
