@@ -3,7 +3,6 @@
 require 'fileutils'
 require 'shellwords'
 
-
 ROOT_PATH = File.expand_path(__dir__)
 DIR_NAME = File.basename(ROOT_PATH)
 GITHUB_PATH = "https://github.com/ParamagicDev/#{DIR_NAME}.git"
@@ -34,14 +33,10 @@ def add_template_repository_to_source_path
 
     source_paths.unshift(tempdir = Dir.mktmpdir(DIR_NAME + '-'))
     at_exit { FileUtils.remove_entry(tempdir) }
-    git clone: [
-      '--quiet',
-      GITHUB_PATH,
-      tempdir
-    ].map(&:shellescape).join(' ')
+    Rake.sh("git clone --quiet #{GITHUB_PATH.shellescape} #{tempdir.shellescape}")
 
     if (branch = __FILE__[%r{#{DIR_NAME}/(.+)/bridgetown.automation.rb}, 1])
-      Dir.chdir(tempdir) { git checkout: branch }
+      Dir.chdir(tempdir) { Rake.sh("git checkout #{branch}") }
       require_files(tempdir)
       @current_dir = File.expand_path(tempdir)
     end
