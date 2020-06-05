@@ -43,36 +43,32 @@ class IntegrationTest < Minitest::Test
   end
 
   def test_it_works_with_local_automation
-    Bundler.with_original_env do
-      Rake.cd TEST_APP
+    Rake.cd TEST_APP
 
-      # This has to overwrite `webpack.config.js` so it needs to force: true
-      ENV['TAILWIND_INTEGRATION_TEST'] = 'true'
+    # This has to overwrite `webpack.config.js` so it needs to force: true
+    ENV['TAILWIND_INTEGRATION_TEST'] = 'true'
 
-      Rake.sh("bundle exec bridgetown new . --force --apply='../bridgetown.automation.rb'")
-    end
+    Rake.sh("bridgetown new . --force --apply='../bridgetown.automation.rb'")
 
     run_assertions
   end
 
   # Have to push to github first, and wait for github to update
   def test_it_works_with_remote_automation
-    Bundler.with_original_env do
-      Rake.cd TEST_APP
-      Rake.sh('bundle exec bridgetown new . --force')
+    Rake.cd TEST_APP
+    Rake.sh('bridgetown new . --force')
 
-      # Force file creation
-      ENV['TAILWIND_INTEGRATION_TEST'] = 'true'
+    # Force file creation
+    ENV['TAILWIND_INTEGRATION_TEST'] = 'true'
 
-      github_url = 'https://raw.githubusercontent.com'
-      user_and_reponame = 'ParamagicDev/bridgetown-plugin-tailwindcss/master'
+    github_url = 'https://raw.githubusercontent.com'
+    user_and_reponame = 'ParamagicDev/bridgetown-plugin-tailwindcss/master'
 
-      file = 'bridgetown.automation.rb'
+    file = 'bridgetown.automation.rb'
 
-      url = "#{github_url}/#{user_and_reponame}/#{file}"
+    url = "#{github_url}/#{user_and_reponame}/#{file}"
 
-      Rake.sh("bridgetown apply #{url}")
-    end
+    Rake.sh("bridgetown apply #{url}")
 
     run_assertions
   end
