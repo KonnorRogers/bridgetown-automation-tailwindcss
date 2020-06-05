@@ -26,7 +26,7 @@ end
 # In that case, use `git clone` to download them to a local temporary dir.
 def add_template_repository_to_source_path
   puts 'ROOT_PATH: ', ROOT_PATH
-  puts 'DIR_NAME: ', DIRNAME
+  puts 'DIR_NAME: ', DIR_NAME
   puts 'GITHUB_PATH: ', GITHUB_PATH
   puts 'TEMPLATE_FILES: ', TEMPLATE_FILES
 
