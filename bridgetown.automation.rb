@@ -3,6 +3,10 @@
 require 'fileutils'
 require 'shellwords'
 
+ROOT_PATH = File.expand_path(__dir__)
+DIR_NAME = File.basename(__dir__)
+GITHUB_PATH = "https://github.com/ParamagicDev/#{dir_name}.git"
+TEMPLATE_FILES = File.join(ROOT_PATH, 'templates')
 # I didnt feel it was necessary here.
 # I left this here for reference.
 def require_files(tmpdir = nil)
@@ -15,22 +19,6 @@ def require_files(tmpdir = nil)
   files.each { |file| require File.join(tmpdir, File.expand_path(file)) }
 end
 
-def root_path
-  File.expand_path(__dir__)
-end
-
-def dir_name
-  File.basename(root_path)
-end
-
-def github_path
-  "https://github.com/ParamagicDev/#{dir_name}.git"
-end
-
-def template_files
-  File.join(root_path, 'templates')
-end
-
 # Copied from: https://github.com/mattbrictson/rails-template
 # Add this template directory to source_paths so that Thor actions like
 # copy_file and template resolve against our source files. If this file was
@@ -38,20 +26,20 @@ end
 # In that case, use `git clone` to download them to a local temporary dir.
 def add_template_repository_to_source_path
   if __FILE__ =~ %r{\Ahttps?://}
-    puts dir_name
+    puts DIR_NAME
     require 'tmpdir'
 
     source_paths.unshift(tempdir = Dir.mktmpdir(dir_name + '-'))
     at_exit { FileUtils.remove_entry(tempdir) }
-    run("git clone --quiet #{github_path.shellescape} #{tempdir.shellescape}")
+    run("git clone --quiet #{GITHUB_PATH.shellescape} #{tempdir.shellescape}")
 
-    if (branch = __FILE__[%r{#{dir_name}/(.+)/bridgetown.automation.rb}, 1])
+    if (branch = __FILE__[%r{#{DIR_NAME}/(.+)/bridgetown.automation.rb}, 1])
       Dir.chdir(tempdir) { system("git checkout #{branch}") }
       require_files(tempdir)
       @current_dir = File.expand_path(tempdir)
     end
   else
-    source_paths.unshift(dir_name)
+    source_paths.unshift(DIR_NAME)
     require_files
   end
 end
@@ -66,7 +54,7 @@ end
 def add_tailwind_config
   filename = 'tailwind.config.js'
 
-  tailwind_config = File.join(template_files, filename)
+  tailwind_config = File.join(TEMPLATE_FILES, filename)
 
   say "Creating #{filename} ...", :green
   create_file(filename, File.read(tailwind_config))
@@ -75,7 +63,7 @@ end
 def import_tailwind_statements
   filename = 'index.scss'
   style_file = File.join('frontend', 'styles', filename)
-  template_file = File.join(template_files, filename)
+  template_file = File.join(TEMPLATE_FILES, filename)
 
   say "Prepending to #{style_file} ...", :green
   prepend_to_file(style_file, File.read(template_file))
@@ -84,7 +72,7 @@ end
 def add_webpack_config
   filename = 'webpack.config.js'
 
-  webpack_config = File.join(template_files, filename)
+  webpack_config = File.join(TEMPLATE_FILES, filename)
 
   say "Creating #{filename}", :green
 
