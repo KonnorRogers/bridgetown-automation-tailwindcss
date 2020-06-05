@@ -25,8 +25,12 @@ end
 # invoked remotely via HTTP, that means the files are not present locally.
 # In that case, use `git clone` to download them to a local temporary dir.
 def add_template_repository_to_source_path
+  puts 'ROOT_PATH: ', ROOT_PATH
+  puts 'DIR_NAME: ', DIRNAME
+  puts 'GITHUB_PATH: ', GITHUB_PATH
+  puts 'TEMPLATE_FILES: ', TEMPLATE_FILES
+
   if __FILE__ =~ %r{\Ahttps?://}
-    puts DIR_NAME
     require 'tmpdir'
 
     source_paths.unshift(tempdir = Dir.mktmpdir(dir_name + '-'))
