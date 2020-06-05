@@ -11,7 +11,7 @@ services:
         DOCKER_USER: ${DOCKER_USER:-user}
         APP_DIR: ${APP_DIR:-/home/user/bridgetown-app}
 
-    command: bash -c "rake test"
+    command: bash -c "bundle exec rake test"
 
     volumes:
       - .:${APP_DIR:-/home/user/bridgetown-app}

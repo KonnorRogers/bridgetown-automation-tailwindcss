@@ -2,6 +2,7 @@
 
 require 'test_helper'
 require 'bundler'
+require 'active_support'
 
 CURRENT_BRIDGETOWN_VERSION = '~> 0.15.0.beta3'
 
