@@ -5,7 +5,7 @@ require 'shellwords'
 
 ROOT_PATH = File.expand_path(__dir__)
 DIR_NAME = File.basename(__dir__)
-GITHUB_PATH = "https://github.com/ParamagicDev/#{dir_name}.git"
+GITHUB_PATH = "https://github.com/ParamagicDev/#{DIR_NAME}.git"
 TEMPLATE_FILES = File.join(ROOT_PATH, 'templates')
 # I didnt feel it was necessary here.
 # I left this here for reference.
@@ -33,7 +33,7 @@ def add_template_repository_to_source_path
   if __FILE__ =~ %r{\Ahttps?://}
     require 'tmpdir'
 
-    source_paths.unshift(tempdir = Dir.mktmpdir(dir_name + '-'))
+    source_paths.unshift(tempdir = Dir.mktmpdir(DIR_NAME + '-'))
     at_exit { FileUtils.remove_entry(tempdir) }
     run("git clone --quiet #{GITHUB_PATH.shellescape} #{tempdir.shellescape}")
 
