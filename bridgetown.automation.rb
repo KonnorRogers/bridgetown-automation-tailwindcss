@@ -4,9 +4,10 @@ require 'fileutils'
 require 'shellwords'
 
 ROOT_PATH = File.expand_path(__dir__)
-DIR_NAME = File.basename(__dir__)
+DIR_NAME = 'bridgetown-plugin-tailwindcss'
 GITHUB_PATH = "https://github.com/ParamagicDev/#{DIR_NAME}.git"
 TEMPLATE_FILES = File.join(ROOT_PATH, 'templates')
+
 # I didnt feel it was necessary here.
 # I left this here for reference.
 def require_files(tmpdir = nil)
