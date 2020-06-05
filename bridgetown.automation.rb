@@ -4,12 +4,13 @@
 require 'fileutils'
 require 'shellwords'
 
+# Dynamically determined due to having to load from the tempdir
 @current_dir = File.expand_path(__dir__)
 
 # If its a remote file, the branch is appended to the end, so go up a level
 # IE: https://blah-blah-blah/bridgetown-plugin-tailwindcss/master
 ROOT_PATH = if __FILE__ =~ %r{\Ahttps?://}
-              File.expand_path('../', ROOT_PATH)
+              File.expand_path('../', __dir__)
             else
               File.expand_path(__dir__)
             end
