@@ -64,7 +64,7 @@ class IntegrationTest < Minitest::Test
       Rake.sh('bundle exec bridgetown new . --force')
 
       ENV['TAILWIND_INTEGRATION_TEST'] = 'true'
-      github_url = 'raw.githubusercontent.com'
+      github_url = 'https://raw.githubusercontent.com'
       user_and_reponame = 'ParamagicDev/bridgetown-plugin-tailwindcss'
 
       file = 'bridgetown.automation.rb'
