@@ -4,7 +4,6 @@ require 'minitest'
 require 'minitest/autorun'
 require 'rake'
 require 'bridgetown-plugin-tailwindcss'
-# require_relative '../bridgetown.automation.rb'
 
 ROOT_DIR = File.expand_path('..', __dir__)
 

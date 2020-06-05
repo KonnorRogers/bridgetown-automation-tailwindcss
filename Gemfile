@@ -8,4 +8,6 @@ gem 'bridgetown', '~> 0.15.0.beta2'
 gem 'minitest'
 gem 'rake'
 gem 'rubocop'
-gem 'activesupport'
+
+# fix an issue with loading active_support
+gem 'activesupport', :require => 'active_support'

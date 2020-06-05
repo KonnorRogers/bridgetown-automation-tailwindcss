@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 # Add this here due to a testing issue
-require 'active_support/core_ext/array/extract_options'
-
 require 'fileutils'
 require 'shellwords'
 
