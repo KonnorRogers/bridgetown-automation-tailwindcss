@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+require 'fileutils'
+require 'shellwords'
+
+
 ROOT_PATH = File.expand_path(__dir__)
 DIR_NAME = File.basename(ROOT_PATH)
 GITHUB_PATH = "https://github.com/ParamagicDev/#{DIR_NAME}.git"

@@ -65,7 +65,7 @@ class IntegrationTest < Minitest::Test
 
       ENV['TAILWIND_INTEGRATION_TEST'] = 'true'
       github_url = 'https://raw.githubusercontent.com'
-      user_and_reponame = 'ParamagicDev/bridgetown-plugin-tailwindcss'
+      user_and_reponame = 'ParamagicDev/bridgetown-plugin-tailwindcss/master'
 
       file = 'bridgetown.automation.rb'
 
