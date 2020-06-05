@@ -6,7 +6,7 @@ require 'shellwords'
 ROOT_PATH = File.expand_path(__dir__)
 DIR_NAME = 'bridgetown-plugin-tailwindcss'
 GITHUB_PATH = "https://github.com/ParamagicDev/#{DIR_NAME}.git"
-TEMPLATE_DIR = 'templates'
+TEMPLATE_DIR = File.join(ROOT_PATH, 'templates')
 
 # I didnt feel it was necessary here.
 # I left this here for reference.
