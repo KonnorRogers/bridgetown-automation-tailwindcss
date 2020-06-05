@@ -33,10 +33,10 @@ def add_template_repository_to_source_path
 
     source_paths.unshift(tempdir = Dir.mktmpdir(DIR_NAME + '-'))
     at_exit { FileUtils.remove_entry(tempdir) }
-    Rake.sh("git clone --quiet #{GITHUB_PATH.shellescape} #{tempdir.shellescape}")
+    system("git clone --quiet #{GITHUB_PATH.shellescape} #{tempdir.shellescape}")
 
     if (branch = __FILE__[%r{#{DIR_NAME}/(.+)/bridgetown.automation.rb}, 1])
-      Dir.chdir(tempdir) { Rake.sh("git checkout #{branch}") }
+      Dir.chdir(tempdir) { system("git checkout #{branch}") }
       require_files(tempdir)
       @current_dir = File.expand_path(tempdir)
     end
