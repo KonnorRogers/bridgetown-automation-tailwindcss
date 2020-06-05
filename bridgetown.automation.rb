@@ -6,7 +6,7 @@ require 'shellwords'
 ROOT_PATH = File.expand_path(__dir__)
 DIR_NAME = 'bridgetown-plugin-tailwindcss'
 GITHUB_PATH = "https://github.com/ParamagicDev/#{DIR_NAME}.git"
-TEMPLATE_FILES = File.join(ROOT_PATH, 'templates')
+TEMPLATE_DIR = 'templates'
 
 # I didnt feel it was necessary here.
 # I left this here for reference.
@@ -26,11 +26,6 @@ end
 # invoked remotely via HTTP, that means the files are not present locally.
 # In that case, use `git clone` to download them to a local temporary dir.
 def add_template_repository_to_source_path
-  puts 'ROOT_PATH: ', ROOT_PATH
-  puts 'DIR_NAME: ', DIR_NAME
-  puts 'GITHUB_PATH: ', GITHUB_PATH
-  puts 'TEMPLATE_FILES: ', TEMPLATE_FILES
-
   if __FILE__ =~ %r{\Ahttps?://}
     require 'tmpdir'
 
@@ -59,7 +54,7 @@ end
 def add_tailwind_config
   filename = 'tailwind.config.js'
 
-  tailwind_config = File.join(TEMPLATE_FILES, filename)
+  tailwind_config = File.join(TEMPLATE_DIR, filename)
 
   say "Creating #{filename} ...", :green
   create_file(filename, File.read(tailwind_config))
@@ -68,7 +63,7 @@ end
 def import_tailwind_statements
   filename = 'index.scss'
   style_file = File.join('frontend', 'styles', filename)
-  template_file = File.join(TEMPLATE_FILES, filename)
+  template_file = File.join(TEMPLATE_DIR, filename)
 
   say "Prepending to #{style_file} ...", :green
   prepend_to_file(style_file, File.read(template_file))
@@ -77,7 +72,7 @@ end
 def add_webpack_config
   filename = 'webpack.config.js'
 
-  webpack_config = File.join(TEMPLATE_FILES, filename)
+  webpack_config = File.join(TEMPLATE_DIR, filename)
 
   say "Creating #{filename}", :green
 
