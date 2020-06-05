@@ -2,14 +2,10 @@
 
 require 'test_helper'
 require 'bundler'
-require 'open3'
 
-CURRENT_BRIDGETOWN_VERSION = '~> 0.15.0.beta2'
-CURRENT_COMMIT = `git rev-parse HEAD`.freeze
+CURRENT_BRIDGETOWN_VERSION = '~> 0.15.0.beta3'
 
 class IntegrationTest < Minitest::Test
-  include TailwindCss::IoTestHelpers
-
   def setup
     Rake.rm_rf(TEST_APP)
     Rake.mkdir_p(TEST_APP)
@@ -49,10 +45,10 @@ class IntegrationTest < Minitest::Test
     Bundler.with_original_env do
       Rake.cd TEST_APP
 
-      # This has to overwrite `webpack.config.js` so it needs input
-      simulate_stdin('y') do
-        Rake.sh("bundle exec bridgetown new . --force --apply='../bridgetown.automation.rb'")
-      end
+      # This has to overwrite `webpack.config.js` so it needs to force: true
+      ENV['TAILWIND_INTEGRATION_TEST'] = 'true'
+
+      Rake.sh("bundle exec bridgetown new . --force --apply='../bridgetown.automation.rb'")
     end
 
     run_assertions
@@ -65,7 +61,7 @@ class IntegrationTest < Minitest::Test
       Rake.sh('bundle exec bridgetown new . --force')
 
       # Force file creation
-      # ENV['TAILWIND_INTEGRATION_TEST'] = 'true'
+      ENV['TAILWIND_INTEGRATION_TEST'] = 'true'
 
       github_url = 'https://raw.githubusercontent.com'
       user_and_reponame = 'ParamagicDev/bridgetown-plugin-tailwindcss/master'
