@@ -2,7 +2,7 @@
 
 ROOT_PATH = File.expand_path(__dir__)
 DIR_NAME = File.basename(ROOT_PATH)
-GITHUB_PATH = "https://github.com/ParamagicDev/#{DIR_NAME}.git"
+GITHUB_PATH = "https://github.com/ParamagicDev/master/#{DIR_NAME}.git"
 TEMPLATE_FILES = File.join(ROOT_PATH, 'templates')
 
 # If you have a lib directory, use this method.
