@@ -3,12 +3,11 @@
 require 'fileutils'
 require 'shellwords'
 
-ROOT_PATH = File.expand_path(__dir__)
-DIR_NAME = File.basename(ROOT_PATH)
+GIT_ROOT = File.expand_path(__dir__)
+DIR_NAME = File.basename(GIT_PATH)
 GITHUB_PATH = "https://github.com/ParamagicDev/#{DIR_NAME}.git"
-TEMPLATE_FILES = File.join(ROOT_PATH, 'templates')
+TEMPLATE_FILES = File.join(GIT_ROOT, 'templates')
 
-# If you have a lib directory, use this method.
 # I didnt feel it was necessary here.
 # I left this here for reference.
 def require_files(tmpdir = nil)
@@ -28,12 +27,12 @@ end
 # In that case, use `git clone` to download them to a local temporary dir.
 def add_template_repository_to_source_path
   if __FILE__ =~ %r{\Ahttps?://}
-    puts 'HI THERE'
+    puts DIR_NAME
     require 'tmpdir'
 
     source_paths.unshift(tempdir = Dir.mktmpdir(DIR_NAME + '-'))
     at_exit { FileUtils.remove_entry(tempdir) }
-    system("git clone --quiet #{GITHUB_PATH.shellescape} #{tempdir.shellescape}")
+    run("git clone --quiet #{GITHUB_PATH.shellescape} #{tempdir.shellescape}")
 
     if (branch = __FILE__[%r{#{DIR_NAME}/(.+)/bridgetown.automation.rb}, 1])
       Dir.chdir(tempdir) { system("git checkout #{branch}") }
