@@ -45,25 +45,28 @@ class IntegrationTest < Minitest::Test
     assert test_styles_file.include?(template_styles_file)
   end
 
-  # def test_it_works_with_local_automation
-  #   Bundler.with_original_env do
-  #     Rake.cd TEST_APP
+  def test_it_works_with_local_automation
+    Bundler.with_original_env do
+      Rake.cd TEST_APP
 
-  #     # This has to overwrite `webpack.config.js` so it needs input
-  #     simulate_stdin('y') do
-  #       Rake.sh("bundle exec bridgetown new . --force --apply='../bridgetown.automation.rb'")
-  #     end
-  #   end
+      # This has to overwrite `webpack.config.js` so it needs input
+      simulate_stdin('y') do
+        Rake.sh("bundle exec bridgetown new . --force --apply='../bridgetown.automation.rb'")
+      end
+    end
 
-  #   run_assertions
-  # end
+    run_assertions
+  end
 
+  # Have to push to github first, and wait for github to update
   def test_it_works_with_remote_automation
     Bundler.with_original_env do
       Rake.cd TEST_APP
       Rake.sh('bundle exec bridgetown new . --force')
 
+      # Force file creation
       ENV['TAILWIND_INTEGRATION_TEST'] = 'true'
+
       github_url = 'https://raw.githubusercontent.com'
       user_and_reponame = 'ParamagicDev/bridgetown-plugin-tailwindcss/master'
 
@@ -76,7 +79,4 @@ class IntegrationTest < Minitest::Test
 
     run_assertions
   end
-
-  #   run_assertions
-  # end
 end
