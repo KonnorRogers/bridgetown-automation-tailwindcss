@@ -15,13 +15,14 @@ This project requires the new `apply` command introduced in Bridgetown
 ### New project
 
 ```bash
-bridgetown new <newsite> --apply="https://raw.githubusercontent.com/ParamagicDev/bridgetown-plugin-tailwindcss/master/bridgetown.automation.rb"
+bridgetown new <newsite> --apply="https://github.com/ParamagicDev/bridgetown-plugin-tailwindcss"
 ```
 
 ### Existing Project
 
 ```bash
-bridgetown apply https://raw.githubusercontent.com/ParamagicDev/bridgetown-plugin-tailwindcss/master/bridgetown.automation.rb
+cd <bridgetown-site>
+bridgetown apply --apply="https://github.com/ParamagicDev/bridgetown-plugin-tailwindcss"
 ```
 
 ## Testing
