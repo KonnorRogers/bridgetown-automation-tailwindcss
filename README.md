@@ -1,17 +1,33 @@
 ## Usage
 
+### New project
+
+```bash
+bridgetown new <newsite> --apply="https://raw.githubusercontent.com/ParamagicDev/bridgetown-plugin-tailwindcss/master/bridgetown.automation.rb"
+```
+
+### Existing Project
+
+```bash
+bridgetown apply https://raw.githubusercontent.com/ParamagicDev/bridgetown-plugin-tailwindcss/master/bridgetown.automation.rb
+```
+
 ## Testing
 
 Right now there is one big integration tests which is run via simple:
 
 ```bash
+git clone https://github.com/ParamagicDev/bridgetown-plugin-tailwindcss/
+cd bridgetown-plugin-tailwindcss
 bundle install
-rake test
+bundle exec rake test
 ```
 
 ### Testing with Docker
 
 ```bash
+git clone https://github.com/ParamagicDev/bridgetown-plugin-tailwindcss/
+cd bridgetown-plugin-tailwindcss
 ./compose.sh up --build
 ```
 
