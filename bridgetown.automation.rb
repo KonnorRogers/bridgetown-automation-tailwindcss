@@ -77,11 +77,12 @@ def add_webpack_config
   webpack_config = File.join(TEMPLATE_FILES, filename)
 
   say "Creating #{filename}", :green
-  create_file(filename, File.read(webpack_config))
+
+  force = (ENV['TAILWIND_INTEGRATION_TEST'] == 'true')
+  create_file(filename, File.read(webpack_config), force: force)
 end
 
 add_template_repository_to_source_path
-
 add_tailwind_config
 add_webpack_config
 import_tailwind_statements

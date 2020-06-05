@@ -63,26 +63,19 @@ class IntegrationTest < Minitest::Test
       Rake.cd TEST_APP
       Rake.sh('bundle exec bridgetown new . --force')
 
-      # simulate_stdin does not work here, not sure why
-      stdout, stderr, status = Open3.capture3('bundle exec bridgetown apply ../bridgetown.automation.rb',
-                                              stdin_data: "y\n")
+      ENV['TAILWIND_INTEGRATION_TEST'] = 'true'
+      github_url = 'raw.githubusercontent.com'
+      user_and_reponame = 'ParamagicDev/bridgetown-plugin-tailwindcss'
 
-      puts stdout
-      puts stderr
-      puts status
+      file = 'bridgetown.automation.rb'
+
+      url = "#{github_url}/#{user_and_reponame}/#{current_commit_hash}/#{file}"
+
+      Rake.sh("bridgetown apply #{url}")
     end
 
     run_assertions
   end
-
-  #   # github_url = 'raw.githubusercontent.com'
-  #   # user_and_reponame = 'ParamagicDev/bridgetown-plugin-tailwindcss'
-
-  #   # file = 'bridgetown.automation.rb'
-
-  #   # url = "#{github_url}/#{user_and_reponame}/#{current_commit_hash}/#{file}"
-
-  #   # Rake.sh("bundle exec bridgetown apply #{url}")
 
   #   run_assertions
   # end
