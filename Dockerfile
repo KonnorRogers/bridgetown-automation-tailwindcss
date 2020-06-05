@@ -3,14 +3,9 @@ FROM ruby:2.6-alpine3.11 as builder
 # Install system dependencies & clean them up
 RUN apk add --no-cache --virtual \
    nodejs-dev yarn bash \
-   tzdata build-essential libffi-dev \
+   tzdata build-base libffi-dev \
    curl git vim \
    libnotify-dev
-
-RUN apt-get update -qq && apt-get install -y \
-    postgresql-client build-essential yarn nodejs \
-    libnotify-dev && \
-    rm -rf /var/lib/apt/lists/*
 
 FROM builder as bridgetownrb-app
 
