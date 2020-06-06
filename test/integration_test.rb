@@ -5,6 +5,7 @@ require 'bundler'
 require 'active_support'
 
 CURRENT_BRIDGETOWN_VERSION = '~> 0.15.0.beta3'
+BRANCH = `git branch --show-current`.freeze
 
 class IntegrationTest < Minitest::Test
   def setup
@@ -62,7 +63,7 @@ class IntegrationTest < Minitest::Test
     ENV['TAILWIND_INTEGRATION_TEST'] = 'true'
 
     github_url = 'https://raw.githubusercontent.com'
-    user_and_reponame = 'ParamagicDev/bridgetown-plugin-tailwindcss/master'
+    user_and_reponame = "ParamagicDev/bridgetown-plugin-tailwindcss/#{BRANCH}"
 
     file = 'bridgetown.automation.rb'
 
