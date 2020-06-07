@@ -2,10 +2,10 @@
 
 require 'test_helper'
 require 'bundler'
-require 'active_support'
+require 'shellwords'
 
 CURRENT_BRIDGETOWN_VERSION = '~> 0.15.0.beta3'
-BRANCH = `git branch --show-current`.freeze
+BRANCH = `git branch --show-current`.chomp.freeze
 
 class IntegrationTest < Minitest::Test
   def setup
@@ -69,7 +69,7 @@ class IntegrationTest < Minitest::Test
 
     url = "#{github_url}/#{user_and_reponame}/#{file}"
 
-    Rake.sh("bridgetown apply #{url}")
+    Rake.sh("bridgetown apply #{url.shellescape}")
 
     run_assertions
   end
