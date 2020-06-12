@@ -22,7 +22,7 @@ bridgetown new <newsite> --apply="https://github.com/ParamagicDev/bridgetown-plu
 
 ```bash
 cd <bridgetown-site>
-bridgetown apply --apply="https://github.com/ParamagicDev/bridgetown-plugin-tailwindcss"
+bridgetown apply "https://github.com/ParamagicDev/bridgetown-plugin-tailwindcss"
 ```
 
 ## Testing
