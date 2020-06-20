@@ -64,7 +64,7 @@ def add_yarn_packages
   packages = 'postcss-import postcss-loader tailwindcss'
 
   say "Adding the following yarn packages: #{packages}", :green
-  system("yarn add #{packages}")
+  run "yarn add -D #{packages}"
 end
 
 def add_tailwind_config
