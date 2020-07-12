@@ -4,7 +4,7 @@
 
 ```bash
 bridgetown -v
-# => bridgetown 0.15.0.beta2 "Overlook"
+# => bridgetown 0.15.0 "Overlook"
 ```
 
 This project requires the new `apply` command introduced in Bridgetown
@@ -41,7 +41,7 @@ bundle exec rake test
 ```bash
 git clone https://github.com/ParamagicDev/bridgetown-plugin-tailwindcss/
 cd bridgetown-plugin-tailwindcss
-./compose.sh up --build
+source docker.env && docker-compose up --build
 ```
 
 ## Issues
