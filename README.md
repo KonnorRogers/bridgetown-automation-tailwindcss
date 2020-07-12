@@ -1,3 +1,5 @@
+![build](https://github.com/ParamagicDev/bridgetown-automation-tailwindcss/workflows/build/badge.svg)
+
 ## Prerequisites
 
 #### "Bridgetown ~> 0.15.0"
