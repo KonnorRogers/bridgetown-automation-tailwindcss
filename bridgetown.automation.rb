@@ -24,18 +24,6 @@ def template_dir
   File.join(@current_dir, 'templates')
 end
 
-# I didnt feel it was necessary here.
-# I left this here for reference.
-def require_files(tmpdir = nil)
-  files = Dir.glob('lib/**/*')
-
-  return if files.empty?
-
-  return files.each { |file| require File.expand_path(file) } if tmpdir.nil?
-
-  files.each { |file| require File.join(tmpdir, File.expand_path(file)) }
-end
-
 # Copied from: https://github.com/mattbrictson/rails-template
 # Add this template directory to source_paths so that Thor actions like
 # copy_file and template resolve against our source files. If this file was
