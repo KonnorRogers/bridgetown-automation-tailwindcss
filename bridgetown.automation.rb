@@ -37,12 +37,10 @@ def add_template_repository_to_source_path
 
     if (branch = __FILE__[%r{#{DIR_NAME}/(.+)/bridgetown.automation.rb}, 1])
       Dir.chdir(tempdir) { system("git checkout #{branch}") }
-      require_files(tempdir)
       @current_dir = File.expand_path(tempdir)
     end
   else
     source_paths.unshift(DIR_NAME)
-    require_files
   end
 end
 
