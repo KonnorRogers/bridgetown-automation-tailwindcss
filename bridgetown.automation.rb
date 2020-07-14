@@ -15,9 +15,7 @@ ROOT_PATH = if __FILE__ =~ %r{\Ahttps?://}
               File.expand_path(__dir__)
             end
 
-DIR_NAME = File.basename(ROOT_PATH)
-
-# DIR_NAME = 'bridgetown-plugin-tailwindcss'
+DIR_NAME = 'bridgetown-automation-tailwindcss'
 GITHUB_PATH = "https://github.com/ParamagicDev/#{DIR_NAME}.git"
 
 def template_dir
