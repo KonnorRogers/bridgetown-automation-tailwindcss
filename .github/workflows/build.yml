@@ -16,4 +16,4 @@ jobs:
       - name: Build and test with Rake / Docker
         run: |
           source docker.env
-          docker-compose up --build
+          docker-compose up --build --exit-code-from web
