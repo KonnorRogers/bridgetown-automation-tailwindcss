@@ -24,7 +24,7 @@ bridgetown new <newsite> --apply="https://github.com/ParamagicDev/bridgetown-plu
 
 ```bash
 cd <bridgetown-site>
-bridgetown apply "https://github.com/ParamagicDev/bridgetown-plugin-tailwindcss"
+bridgetown apply "https://github.com/ParamagicDev/bridgetown-automation-tailwindcss"
 ```
 
 ## Testing
@@ -32,7 +32,7 @@ bridgetown apply "https://github.com/ParamagicDev/bridgetown-plugin-tailwindcss"
 Right now there is one big integration tests which is run via simple:
 
 ```bash
-git clone https://github.com/ParamagicDev/bridgetown-plugin-tailwindcss/
+git clone https://github.com/ParamagicDev/bridgetown-automation-tailwindcss/
 cd bridgetown-plugin-tailwindcss
 bundle install
 bundle exec rake test
@@ -41,8 +41,8 @@ bundle exec rake test
 ### Testing with Docker
 
 ```bash
-git clone https://github.com/ParamagicDev/bridgetown-plugin-tailwindcss/
-cd bridgetown-plugin-tailwindcss
+git clone https://github.com/ParamagicDev/bridgetown-automation-tailwindcss/
+cd bridgetown-automation-tailwindcss
 source docker.env && docker-compose up --build
 ```
 
