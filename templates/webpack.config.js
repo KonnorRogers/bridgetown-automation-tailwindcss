@@ -10,27 +10,27 @@ module.exports = {
     modules: false,
     builtAt: false,
     timings: false,
-    children: false,
+    children: false
   },
   output: {
     path: path.resolve(__dirname, "output", "_bridgetown", "static", "js"),
-    filename: "all.[contenthash].js",
+    filename: "all.[contenthash].js"
   },
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: [".js", ".jsx"]
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "../css/all.[contenthash].css",
+      filename: "../css/all.[contenthash].css"
     }),
     new ManifestPlugin({
-      fileName: path.resolve(__dirname, ".bridgetown-webpack", "manifest.json"),
-    }),
+      fileName: path.resolve(__dirname, ".bridgetown-webpack", "manifest.json")
+    })
   ],
   module: {
     rules: [
       {
-        test: /.(js|jsx)/,
+        test: /\.(js|jsx)/,
         use: {
           loader: "babel-loader",
           options: {
@@ -40,15 +40,15 @@ module.exports = {
               [
                 "@babel/plugin-transform-runtime",
                 {
-                  helpers: false,
-                },
-              ],
-            ],
-          },
-        },
+                  helpers: false
+                }
+              ]
+            ]
+          }
+        }
       },
       {
-        test: /.(s[ac]|c)ss$/,
+        test: /\.(s[ac]|c)ss$/,
         use: [
           MiniCssExtractPlugin.loader,
           "css-loader",
@@ -58,10 +58,10 @@ module.exports = {
               sassOptions: {
                 includePaths: [
                   path.resolve(__dirname, "src/_components"),
-                  path.resolve(__dirname, "src/_includes"),
-                ],
-              },
-            },
+                  path.resolve(__dirname, "src/_includes")
+                ]
+              }
+            }
           },
           {
             loader: "postcss-loader",
@@ -70,20 +70,20 @@ module.exports = {
               plugins: [
                 require("postcss-import"),
                 require("tailwindcss"),
-                require("autoprefixer"),
-              ],
-            },
-          },
-        ],
+                require("autoprefixer")
+              ]
+            }
+          }
+        ]
       },
       {
-        test: /.woff2?$|.ttf$|.eot$|.svg$/,
+        test: /\.woff2?$|\.ttf$|\.eot$|\.svg$/,
         loader: "file-loader",
         options: {
           outputPath: "../fonts",
-          publicPath: "../fonts",
-        },
-      },
-    ],
-  },
+          publicPath: "../fonts"
+        }
+      }
+    ]
+  }
 };
