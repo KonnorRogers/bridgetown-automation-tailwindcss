@@ -1,7 +1,7 @@
 module.exports = {
   purge: {
     mode: "production",
-    content: ["./src/**/*.html"],
+    content: ["./output/**/*.html"],
   },
   theme: {
     extend: {},
