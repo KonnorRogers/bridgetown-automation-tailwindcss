@@ -17,7 +17,7 @@ This project requires the new `apply` command introduced in Bridgetown
 ### New project
 
 ```bash
-bridgetown new <newsite> --apply="https://github.com/ParamagicDev/bridgetown-plugin-tailwindcss"
+bridgetown new <newsite> --apply="https://github.com/ParamagicDev/bridgetown-automation-tailwindcss"
 ```
 
 ### Existing Project
@@ -33,7 +33,7 @@ Right now there is one big integration tests which is run via simple:
 
 ```bash
 git clone https://github.com/ParamagicDev/bridgetown-automation-tailwindcss/
-cd bridgetown-plugin-tailwindcss
+cd bridgetown-automation-tailwindcss
 bundle install
 bundle exec rake test
 ```
