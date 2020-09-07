@@ -2,15 +2,15 @@
 
 ## Prerequisites
 
-#### "Bridgetown ~> 0.15.0"
+#### "Bridgetown ~> 0.16.0"
 
 ```bash
 bridgetown -v
-# => bridgetown 0.15.0 "Overlook"
+# => bridgetown 0.16.0 "Crystal Springs"
 ```
 
 This project requires the new `apply` command introduced in Bridgetown
-`0.15.0`
+`>= 0.15.0` 
 
 ## Usage
 
