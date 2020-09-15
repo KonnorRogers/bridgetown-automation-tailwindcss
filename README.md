@@ -58,4 +58,6 @@ bridgetown version with a PostCss loader.
 Sometimes you may see an error related to requiring ActiveSupport. 
 Try rerunning the above command with `bundle exec` prepended, like so:
 
-`bridgetown apply "https://github.com/ParamagicDev/bridgetown-automation-tailwindcss"`
+```bash
+bundle exec bridgetown apply "https://github.com/ParamagicDev/bridgetown-automation-tailwindcss"
+```
