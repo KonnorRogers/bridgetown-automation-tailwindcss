@@ -66,12 +66,13 @@ module.exports = {
           {
             loader: "postcss-loader",
             options: {
-              ident: "postcss",
-              plugins: [
-                require("postcss-import"),
-                require("tailwindcss"),
-                require("autoprefixer")
-              ]
+              postcssOptions: {
+                plugins: [
+                  require("postcss-import"),
+                  require("tailwindcss"),
+                  require("autoprefixer")
+                ]
+              }
             }
           }
         ]
