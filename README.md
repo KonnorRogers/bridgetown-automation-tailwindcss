@@ -24,7 +24,7 @@ bridgetown new <newsite> --apply="https://github.com/ParamagicDev/bridgetown-aut
 
 ```bash
 cd <bridgetown-site>
-bridgetown apply "https://github.com/ParamagicDev/bridgetown-automation-tailwindcss"
+[bundle exec] bridgetown apply "https://github.com/ParamagicDev/bridgetown-automation-tailwindcss"
 ```
 
 ## Testing
