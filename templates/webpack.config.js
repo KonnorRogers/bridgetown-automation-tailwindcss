@@ -68,9 +68,9 @@ module.exports = {
             options: {
               postcssOptions: {
                 plugins: [
-                  require("postcss-import"),
-                  require("tailwindcss"),
-                  require("autoprefixer")
+                  "postcss-import",
+                  "tailwindcss",
+                  "autoprefixer"
                 ]
               }
             }
