@@ -52,3 +52,10 @@ Right now, the script does not do a smart replace of
 `webpack.config.js`. If you have a webpack config different from the
 stock version of Bridgetown it will be replaced with the default
 bridgetown version with a PostCss loader.
+
+### ActiveSupport issue
+
+Sometimes you may see an error related to requiring ActiveSupport. 
+Try rerunning the above command with `bundle exec` prepended, like so:
+
+`bridgetown apply "https://github.com/ParamagicDev/bridgetown-automation-tailwindcss"`
