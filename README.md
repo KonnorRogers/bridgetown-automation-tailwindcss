@@ -1,5 +1,27 @@
 ![build](https://github.com/ParamagicDev/bridgetown-automation-tailwindcss/workflows/build/badge.svg)
 
+# Purpose
+
+An automation to add TailwindCSS to a Bridgetown site.
+
+This automation will create the following files:
+
+- `webpack.config.js`
+- `tailwind.config.js`
+
+It will modify the following files:
+
+- `frontend/index.scss`
+
+It will add the following NPM packages:
+
+- [postcss-import](https://github.com/postcss/postcss-import)
+- [postcss-loader](https://webpack.js.org/loaders/postcss-loader/)
+- [tailwindcss](https://tailwindcss.com/)
+
+
+**This is not an official tailwind repository / product**
+
 ## Prerequisites
 
 #### "Bridgetown ~> 0.16.0"
