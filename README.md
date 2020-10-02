@@ -24,14 +24,14 @@ It will add the following NPM packages:
 
 ## Prerequisites
 
-#### "Bridgetown ~> 0.16.0"
+#### "Bridgetown >= 0.15.0"
 
 ```bash
 bridgetown -v
-# => bridgetown 0.16.0 "Crystal Springs"
+# => bridgetown 0.17.0 "Mount Scott"
 ```
 
-This project requires the new `apply` command introduced in Bridgetown
+This project requires the `apply` command introduced in Bridgetown version
 `>= 0.15.0` 
 
 ## Usage
