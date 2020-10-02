@@ -4,6 +4,10 @@
 
 An automation to add TailwindCSS to a Bridgetown site.
 
+**This is not an official tailwind repository / product**
+
+## What this automation does 
+
 This automation will create the following files:
 
 - `webpack.config.js`
@@ -18,9 +22,6 @@ It will add the following NPM packages:
 - [postcss-import](https://github.com/postcss/postcss-import)
 - [postcss-loader](https://webpack.js.org/loaders/postcss-loader/)
 - [tailwindcss](https://tailwindcss.com/)
-
-
-**This is not an official tailwind repository / product**
 
 ## Prerequisites
 
