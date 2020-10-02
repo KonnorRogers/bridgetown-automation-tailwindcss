@@ -8,12 +8,15 @@ An automation to add TailwindCSS to a Bridgetown site.
 
 ## What this automation does 
 
-This automation will create the following files:
+This automation will create the following file:
 
-- `webpack.config.js`
 - `tailwind.config.js`
 
-It will modify the following files:
+It will replace the following file:
+
+- `webpack.config.js`
+
+It will modify the following file:
 
 - `frontend/index.scss`
 
