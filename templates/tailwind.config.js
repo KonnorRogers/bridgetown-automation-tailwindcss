@@ -1,8 +1,9 @@
 module.exports = {
-  purge: {
-    mode: "production",
-    content: ["./output/**/*.html"],
+  future: {
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: false
   },
+  purge: [],
   theme: {
     extend: {},
   },

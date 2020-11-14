@@ -45,19 +45,13 @@ def add_template_repository_to_source_path
 end
 
 def add_yarn_packages
-  packages = 'postcss-import postcss-loader tailwindcss'
+  packages = "postcss-import \
+              postcss-loader \
+              tailwindcss \
+              @fullhuman/postcss-purgecss"
 
-  say "Adding the following yarn packages: #{packages}", :green
+  say "Adding the following yarn packages: #{packages.split(/s+/).join(" ")}", :green
   run "yarn add -D #{packages}"
-end
-
-def add_tailwind_config
-  filename = 'tailwind.config.js'
-
-  tailwind_config = File.join(template_dir, filename)
-
-  say "Creating #{filename} ...", :green
-  create_file(filename, File.read(tailwind_config))
 end
 
 def import_tailwind_statements
@@ -69,19 +63,19 @@ def import_tailwind_statements
   prepend_to_file(style_file, File.read(template_file))
 end
 
-def add_webpack_config
-  filename = 'webpack.config.js'
+def add_config_files
+  config_files = %w[webpack.config.js tailwind.config.js postcss.config.js]
 
-  webpack_config = File.join(template_dir, filename)
+  config_files.each do |file|
+    config_file = File.join(template_dir, filename)
+    say "Creating #{filename}", :green
 
-  say "Creating #{filename}", :green
-
-  force = (ENV['TAILWIND_INTEGRATION_TEST'] == 'true')
-  create_file(filename, File.read(webpack_config), force: force)
+    force = (ENV['TAILWIND_INTEGRATION_TEST'] == 'true')
+    create_file(filename, File.read(webpack_config), force: force)
+  end
 end
 
 add_template_repository_to_source_path
-add_tailwind_config
-add_webpack_config
-import_tailwind_statements
 add_yarn_packages
+add_config_files
+import_tailwind_statements
