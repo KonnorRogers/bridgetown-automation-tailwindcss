@@ -25,8 +25,8 @@ class IntegrationTest < Minitest::Test
     config_files = %w[tailwind.config.js webpack.config.js postcss.config.js]
 
     config_files.each do |config_file|
-      test_config_file = read_test_file(tailwind)
-      template_config_file = read_template_file(tailwind)
+      test_config_file = read_test_file(config_file)
+      template_config_file = read_template_file(config_file)
 
       assert_equal(test_config_file, template_config_file)
     end
