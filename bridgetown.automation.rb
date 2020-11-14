@@ -50,7 +50,7 @@ def add_yarn_packages
               tailwindcss \
               @fullhuman/postcss-purgecss"
 
-  say "Adding the following yarn packages: #{packages.split(/s+/).join(" ")}", :green
+  say "Adding the following yarn packages: #{packages.split(/\s+/).join(" ")}", :green
   run "yarn add -D #{packages}"
 end
 
@@ -66,7 +66,7 @@ end
 def add_config_files
   config_files = %w[webpack.config.js tailwind.config.js postcss.config.js]
 
-  config_files.each do |file|
+  config_files.each do |filename|
     config_file = File.join(template_dir, filename)
     say "Creating #{filename}", :green
 
