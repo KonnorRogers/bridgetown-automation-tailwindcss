@@ -71,7 +71,7 @@ def add_config_files
     say "Creating #{filename}", :green
 
     force = (ENV['TAILWIND_INTEGRATION_TEST'] == 'true')
-    create_file(filename, File.read(webpack_config), force: force)
+    create_file(filename, File.read(filename), force: force)
   end
 end
 
