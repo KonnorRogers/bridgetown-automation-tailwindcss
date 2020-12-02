@@ -11,6 +11,7 @@ An automation to add TailwindCSS to a Bridgetown site.
 This automation will create the following file:
 
 - `tailwind.config.js`
+- `postcss.config.js`
 
 It will replace the following file:
 
