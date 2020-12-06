@@ -48,6 +48,7 @@ def add_yarn_packages
   packages = "postcss-import \
               postcss-loader \
               tailwindcss \
+              autoprefixer \
               @fullhuman/postcss-purgecss"
 
   say "Adding the following yarn packages: #{packages.split(/\s+/).join(" ")}", :green
