@@ -1,12 +1,27 @@
 module.exports = {
   future: {
+    defaultLineHeights: true,
+    purgeLayersByDefault: true,
     removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: false
+    standardFontWeights: true
   },
-  purge: [],
+  purge: {
+    content: [
+      "./output/**/*.html",
+      "./frontend/**/*.js",
+      "./src/**/*.md",
+      "./src/**/*.html",
+      "./src/**/*.liquid"
+    ]
+  },
   theme: {
-    extend: {},
+    extend: {}
   },
   variants: {},
-  plugins: [],
+  plugins: [
+    // add this line if you use tailwindui
+    // require('@tailwindcss/forms'),
+    require("@tailwindcss/typography"),
+    require("@tailwindcss/aspect-ratio")
+  ]
 };

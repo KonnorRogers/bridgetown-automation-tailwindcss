@@ -39,3 +39,4 @@ spec/dest
 tags
 test_app
 *.tgz
+*~
