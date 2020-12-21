@@ -45,11 +45,14 @@ def add_template_repository_to_source_path
 end
 
 def add_yarn_packages
-  packages = "postcss-import \
+  packages = "postcss \
+              postcss-import \
               postcss-loader \
               tailwindcss \
-              autoprefixer \
-              @fullhuman/postcss-purgecss"
+              @tailwindcss/aspect-ratio \
+              @tailwindcss/forms \
+              @tailwindcss/typography \
+              autoprefixer"
 
   say "Adding the following yarn packages: #{packages.split(/\s+/).join(" ")}", :green
   run "yarn add -D #{packages}"
