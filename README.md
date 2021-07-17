@@ -4,6 +4,10 @@
 
 An automation to add TailwindCSS to a Bridgetown site.
 
+This automation is deprecated. Go checkout the official bridgetown tailwind integration.
+
+https://www.bridgetownrb.com/docs/bundled-configurations#tailwindcss
+
 **This is not an official tailwind repository / product**
 
 ## What this automation does 
